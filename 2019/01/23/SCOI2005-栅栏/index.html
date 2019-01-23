@@ -7,18 +7,18 @@
   
   <title>[SCOI2005]栅栏 | Dunko_ydk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目点这里 思路看完题目之后就有着一种打爆搜的冲动，当然是我们喜欢的DFS啦。m&amp;lt;=50为什么不打DFS呢？ 注意题目中要的答案并不是直接爆搜就可以快速的找到。我们还需要加一些“特技”！没错，就是二分答案！！！ 再用爆搜判断这个答案是否可以要（就是二分中的check）。 当然还要剪枝，不然TLE会让你十分难受。 下面说一下这题要用到的剪枝方法：  将提供的木材和需要的木材排序 记录浪费的长度">
+  <meta name="description" content="题目点这里">
 <meta name="keywords" content="搜索,题解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[SCOI2005]栅栏">
 <meta property="og:url" content="https://Dunko666.github.io/2019/01/23/SCOI2005-栅栏/index.html">
 <meta property="og:site_name" content="Dunko_ydk">
-<meta property="og:description" content="题目点这里 思路看完题目之后就有着一种打爆搜的冲动，当然是我们喜欢的DFS啦。m&amp;lt;=50为什么不打DFS呢？ 注意题目中要的答案并不是直接爆搜就可以快速的找到。我们还需要加一些“特技”！没错，就是二分答案！！！ 再用爆搜判断这个答案是否可以要（就是二分中的check）。 当然还要剪枝，不然TLE会让你十分难受。 下面说一下这题要用到的剪枝方法：  将提供的木材和需要的木材排序 记录浪费的长度">
+<meta property="og:description" content="题目点这里">
 <meta property="og:locale" content="zh-CH">
-<meta property="og:updated_time" content="2019-01-23T14:23:38.924Z">
+<meta property="og:updated_time" content="2019-01-23T14:25:27.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[SCOI2005]栅栏">
-<meta name="twitter:description" content="题目点这里 思路看完题目之后就有着一种打爆搜的冲动，当然是我们喜欢的DFS啦。m&amp;lt;=50为什么不打DFS呢？ 注意题目中要的答案并不是直接爆搜就可以快速的找到。我们还需要加一些“特技”！没错，就是二分答案！！！ 再用爆搜判断这个答案是否可以要（就是二分中的check）。 当然还要剪枝，不然TLE会让你十分难受。 下面说一下这题要用到的剪枝方法：  将提供的木材和需要的木材排序 记录浪费的长度">
+<meta name="twitter:description" content="题目点这里">
   
     <link rel="alternate" href="/atom.xml" title="Dunko_ydk" type="application/atom+xml">
   
@@ -88,6 +88,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><strong>题目</strong></h2><p><a href="https://www.luogu.org/problemnew/show/P2329" target="_blank" rel="noopener">点这里</a></p>
+<a id="more"></a>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><strong>思路</strong></h2><p>看完题目之后就有着一种打爆搜的冲动，当然是我们喜欢的DFS啦。m&lt;=50为什么不打DFS呢？</p>
 <p>注意题目中要的答案并不是直接爆搜就可以快速的找到。我们还需要加一些“特技”！<br>没错，就是<strong>二分答案</strong>！！！ 再用爆搜判断这个答案是否可以要（就是二分中的check）。</p>
 <p>当然还要<strong>剪枝</strong>，不然TLE会让你十分难受。</p>
