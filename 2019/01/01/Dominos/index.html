@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="题目点这儿">
-<meta name="keywords" content="题解,主席树">
+  <meta name="description" content="题目这是题目">
+<meta name="keywords" content="Tarjan,题解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MKTHNUM - K-th Number">
-<meta property="og:url" content="https://Dunko666.github.io/2019/01/24/MKTHNUM-K-th-Number/index.html">
+<meta property="og:title" content="Dominos">
+<meta property="og:url" content="https://Dunko666.github.io/2019/01/01/Dominos/index.html">
 <meta property="og:site_name" content="Dunko_ydk">
-<meta property="og:description" content="题目点这儿">
+<meta property="og:description" content="题目这是题目">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-24T09:56:28.614Z">
+<meta property="og:updated_time" content="2019-01-24T11:25:20.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MKTHNUM - K-th Number">
-<meta name="twitter:description" content="题目点这儿">
+<meta name="twitter:title" content="Dominos">
+<meta name="twitter:description" content="题目这是题目">
 
 
 
 
 
 
-  <link rel="canonical" href="https://Dunko666.github.io/2019/01/24/MKTHNUM-K-th-Number/">
+  <link rel="canonical" href="https://Dunko666.github.io/2019/01/01/Dominos/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>MKTHNUM - K-th Number | Dunko_ydk</title>
+  <title>Dominos | Dunko_ydk</title>
   
 
 
@@ -340,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://Dunko666.github.io/2019/01/24/MKTHNUM-K-th-Number/">
+    <link itemprop="mainEntityOfPage" href="https://Dunko666.github.io/2019/01/01/Dominos/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ydk">
@@ -357,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MKTHNUM - K-th Number
+          <h1 class="post-title" itemprop="name headline">Dominos
 
               
             
@@ -383,12 +383,24 @@
                 
               
 
-              <time title="Post created: 2019-01-24 17:24:34 / Updated at: 17:56:28" itemprop="dateCreated datePublished" datetime="2019-01-24T17:24:34+08:00">2019-01-24</time>
+              <time title="Post created: 2019-01-01 08:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T08:00:00+08:00">2019-01-01</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-01-24 19:25:20" itemprop="dateModified" datetime="2019-01-24T19:25:20+08:00">2019-01-24</time>
               
             
           </span>
@@ -405,7 +417,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据结构/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/图论/" itemprop="url" rel="index"><span itemprop="name">图论</span></a></span>
 
                 
                 
@@ -440,10 +452,14 @@
       
 
       
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><strong>题目</strong></h2><p><a href="https://www.luogu.org/problemnew/show/SP3946" target="_blank" rel="noopener">点这儿</a><br><a id="more"></a></p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><strong>思路</strong></h2><p>主席树大家一定都有所了解吧，这一题就是主席树的模板啊！！<br><strong>静态区间第K小</strong>，不就说明了这题可以用主席树吗？主席树中动态开点就不多说了吧<br>还有就是没看这n个数的范围这么大吗？一定要用<strong>离散化</strong></p>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a><strong>算法</strong></h2><p>想必大家都会一点点主席树吧，那蒟蒻我就不再多说了，实在不行可以看看上面大佬的题解，或是找几篇博客看看，还可以找几个视频看看。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h2><p>不必多说了吧，代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">500001</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l,r,sum;</span><br><span class="line">&#125;T[maxn*<span class="number">20</span>];<span class="comment">//这是保存树的结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">zz</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,id;</span><br><span class="line">&#125;a[maxn];<span class="comment">//离散化时要用</span></span><br><span class="line"><span class="keyword">int</span> n,m,b[maxn],cnt,root[maxn];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(zz a,zz b)</span></span>&#123;<span class="keyword">return</span> a.x&lt;b.x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> &amp;rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;<span class="comment">//建树</span></span><br><span class="line"><span class="comment">//注意，这里的rt，也就是这棵树的根是会变的</span></span><br><span class="line">    T[++cnt]=T[rt]; rt=cnt; T[rt].sum++;<span class="comment">//先与上一个树一样，有改变的地方再新建点</span></span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;<span class="comment">//这里就和线段树的操作一样</span></span><br><span class="line">    <span class="keyword">if</span>(x&lt;=mid) update(x,T[rt].l,l,mid);</span><br><span class="line">    <span class="keyword">else</span> update(x,T[rt].r,mid+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> rt1,<span class="keyword">int</span> rt2,<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;<span class="comment">//查询</span></span><br><span class="line">    <span class="keyword">int</span> d=T[T[rt2].l].sum-T[T[rt1].l].sum;</span><br><span class="line">    <span class="comment">//前缀和思想，也可以拆开来一颗树一棵树的写，这里我是将它放一起做了</span></span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=d) <span class="keyword">return</span> ask(T[rt1].l,T[rt2].l,x,l,mid);</span><br><span class="line">    <span class="comment">//如果这区间左半边的数的数量比x大，那第x小的数一定在左半边。</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> ask(T[rt1].r,T[rt2].r,x-d,mid+<span class="number">1</span>,r);</span><br><span class="line">    <span class="comment">//不然就在右半边找第x-d大的数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i].x);</span><br><span class="line">        a[i].id=i;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(a+<span class="number">1</span>,a+n+<span class="number">1</span>,cmp);<span class="comment">//先排序一遍，从小到大</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) b[a[i].id]=i;<span class="comment">//离散化关键点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        root[i]=root[i<span class="number">-1</span>];</span><br><span class="line">        update(b[i],root[i],<span class="number">1</span>,n);</span><br><span class="line">    &#125;<span class="comment">//建树</span></span><br><span class="line">    <span class="keyword">int</span> x,y,z;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;x,&amp;y,&amp;z);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a[ask(root[x<span class="number">-1</span>],root[y],z,<span class="number">1</span>,n)].x);<span class="comment">//找区间x到y之间第K小的数</span></span><br><span class="line">        <span class="comment">//转化成前缀和，主席树基本操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><strong>题目</strong></h2><p><a href="https://www.luogu.org/problemnew/show/UVA11504" target="_blank" rel="noopener">这是题目</a><br><a id="more"></a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a><strong>题意</strong></h2><p>给出多组数据，每组数据有一个n和m，表示点数和边数。<br>之后m行，有两个数x和y，表示有一条从x到y的边（有环）<br>求至少要从多少点出发，可以遍历全图</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><strong>思路</strong></h2><p>这题就是用<strong>Tarjan缩点</strong>，使图变为一个<strong>DAG</strong>，再找<strong>入度为0</strong>的点有几个就可以了。   </p>
+<p>如果不会Tarjan就别看了，还有注意是多组数据，要<strong>初始化</strong>。   </p>
+<p>这题就是这样，希望不要出现恶意评分！！！</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h2><p>话不多说，给出代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">200001</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> next,to;</span><br><span class="line">&#125;edge[maxn];<span class="comment">//前向星建边</span></span><br><span class="line"><span class="keyword">int</span> n,m,dfn[maxn],tot,low[maxn],co[maxn],coc,cnt,in[maxn],head[maxn];</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;sta;<span class="comment">//这也可以手打，不过我懒</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	dfn[x]=low[x]=++tot;sta.push(x);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[x];i;i=edge[i].next)&#123;</span><br><span class="line">		<span class="keyword">int</span> y=edge[i].to;</span><br><span class="line">		<span class="keyword">if</span>(!dfn[y]) Tarjan(y),low[x]=min(low[x],low[y]);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(!co[y]) low[x]=min(low[x],dfn[y]);<span class="comment">//注意这里是dfn[y],不是low[y]!!</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(dfn[x]==low[x])&#123;</span><br><span class="line">		co[x]=++coc;<span class="comment">//找到一个环了，给点染色</span></span><br><span class="line">		<span class="keyword">while</span>(sta.top()!=x)<span class="comment">//同一个环的点染色</span></span><br><span class="line">		co[sta.top()]=coc,sta.pop();</span><br><span class="line">		sta.pop();<span class="comment">//不要忘记这个，我经常错</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tt;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;tt);</span><br><span class="line">	<span class="keyword">while</span>(tt--)&#123;</span><br><span class="line">	    cnt=<span class="number">0</span>,coc=<span class="number">0</span>,tot=<span class="number">0</span>;<span class="comment">//一大堆初始化</span></span><br><span class="line">	    <span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(in));<span class="comment">//一大堆初始化</span></span><br><span class="line">	    <span class="built_in">memset</span>(head,<span class="number">0</span>,<span class="keyword">sizeof</span>(head));<span class="comment">//一大堆初始化</span></span><br><span class="line">	    <span class="built_in">memset</span>(dfn,<span class="number">0</span>,<span class="keyword">sizeof</span>(dfn));<span class="comment">//一大堆初始化</span></span><br><span class="line">	    <span class="built_in">memset</span>(low,<span class="number">0</span>,<span class="keyword">sizeof</span>(low));<span class="comment">//一大堆初始化</span></span><br><span class="line">	    <span class="built_in">memset</span>(co,<span class="number">0</span>,<span class="keyword">sizeof</span>(co));<span class="comment">//一大堆初始化</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">		<span class="keyword">int</span> x,y;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">			edge[++cnt]=(node)&#123;head[x],y&#125;;</span><br><span class="line">			head[x]=cnt;<span class="comment">//建边</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="keyword">if</span>(!dfn[i]) Tarjan(i);<span class="comment">//进行Tarjan缩点 </span></span><br><span class="line">		<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		  <span class="keyword">for</span>(<span class="keyword">int</span> j=head[i];j;j=edge[j].next)</span><br><span class="line">		  <span class="keyword">if</span>(co[i]!=co[edge[j].to]) in[co[edge[j].to]]++;</span><br><span class="line">          <span class="comment">//如果两个点不是同一种颜色，就说明它们不在同一环中，改变入度</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=coc;i++) </span><br><span class="line">		<span class="keyword">if</span>(!in[i]) ans++;<span class="comment">//这里是从coc个缩点中找入度为0的点</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>希望能过，再%一下Venus大佬。</p>
+<p>谢谢观看。</p>
 
       
     </div>
@@ -467,9 +483,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/题解/" rel="tag"># 题解</a>
+            <a href="/tags/Tarjan/" rel="tag"># Tarjan</a>
           
-            <a href="/tags/主席树/" rel="tag"># 主席树</a>
+            <a href="/tags/题解/" rel="tag"># 题解</a>
           
         </div>
       
@@ -482,8 +498,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/24/小猫爬山/" rel="next" title="小猫爬山">
-                <i class="fa fa-chevron-left"></i> 小猫爬山
+              <a href="/2019/01/01/MKTHNUM-K-th-Number/" rel="next" title="MKTHNUM - K-th Number">
+                <i class="fa fa-chevron-left"></i> MKTHNUM - K-th Number
               </a>
             
           </div>
@@ -492,8 +508,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/24/ことりのおやつ（小鸟的点心）/" rel="prev" title="ことりのおやつ（小鸟的点心）">
-                ことりのおやつ（小鸟的点心） <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/23/SCOI2005-栅栏/" rel="prev" title="[SCOI2005]栅栏">
+                [SCOI2005]栅栏 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -648,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">3.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题意"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
