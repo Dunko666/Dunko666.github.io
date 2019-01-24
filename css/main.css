@@ -1895,7 +1895,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d7c786;
+  background: #dacfd7;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2862,4 +2862,75 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+body {
+  background: url("http://img.netbian.com/file/20140107/6f4f4de9acb8895c9571748c10b18f14.jpg") fixed no-repeat;
+  background-size: 99%;
+}
+.main-inner {
+  background-color: rgba(0,0,0,0.529);
+  border-radius: 10px;
+  color: rgba(255,255,255,0.937);
+  width: 77.7% !important;
+}
+.main-inner h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  color: rgba(255,255,255,0.937);
+}
+.posts-expand {
+  color: #fff;
+  width: 1050px;
+}
+.post-title-link {
+  color: rgba(255,255,255,0.875) !important;
+}
+.post-title-link::before {
+  background-color: #fff !important;
+}
+.post-button a {
+  border-bottom: 2px solid #fff;
+}
+.btn {
+  color: #fff;
+}
+.posts-expand {
+  padding-top: 1em;
+  padding-left: 2em;
+  padding-bottom: 2em;
+}
+p {
+  line-height: 20px;
+  font-size: 16px;
+  font-family: "Segoe Print";
+  line-width: 500px;
+}
+.posts-expand .post-body h2,
+.posts-expand .post-body h3,
+.posts-expand .post-body h4,
+.posts-expand .post-body h5,
+.posts-expand .post-body h6 {
+  padding-top: 0px !important;
+}
+body {
+  line-height: 1;
+}
+.use-motion .post-block,
+.use-motion .pagination,
+.use-motion .comments {
+  opacity: 0;
+  background-size: 100px 100px !important;
+  background-color: rgba(0,0,0,0.161) !important;
+}
+a {
+  color: #7df;
+  font-weight: 800;
+}
+.menu .menu-item a,
+.menu .menu-item span.exturl {
+  line-height: 2em;
 }
