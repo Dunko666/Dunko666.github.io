@@ -1895,7 +1895,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #dacfd7;
+  background: #b45bff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2871,7 +2871,7 @@ body {
   background-color: rgba(0,0,0,0.529);
   border-radius: 10px;
   color: rgba(255,255,255,0.937);
-  width: 77.7% !important;
+  width: 88.8% !important;
 }
 .main-inner h1,
 h2,
@@ -2933,4 +2933,25 @@ a {
 .menu .menu-item a,
 .menu .menu-item span.exturl {
   line-height: 2em;
+}
+.header {
+  background: rgba(0,0,0,0.525);
+}
+.site-meta .site-title {
+  font-size: 24px;
+  font-weight: bolder;
+  color: #7df !important;
+}
+.highlight .code pre {
+  width: 100%;
+  background-color: #101010;
+}
+.highlight .gutter pre {
+  color: #fff;
+  text-align: right;
+  background-color: #101010;
+}
+pre,
+.highlight {
+  background: rgba(247,247,247,0);
 }
