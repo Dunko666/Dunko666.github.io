@@ -1895,7 +1895,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b45bff;
+  background: #f04dc1;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2954,4 +2954,7 @@ a {
 pre,
 .highlight {
   background: rgba(247,247,247,0);
+}
+.highlight .line {
+  color: rgba(255,255,255,0.749);
 }
