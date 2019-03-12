@@ -1488,6 +1488,9 @@ P3946" target="_blank" rel="noopener">点这里</a><br>
       ta.readOnly = false;
       var result = document.execCommand('copy');
       
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
       ta.blur(); // For iOS
       $(this).blur();
     })).on('mouseleave', function(e) {
