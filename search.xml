@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[[USACO13JAN]牛的阵容Cow Lineup]]></title>
+    <url>%2F2019%2F02%2F22%2FUSACO13JAN-%E7%89%9B%E7%9A%84%E9%98%B5%E5%AE%B9Cow-Lineup%2F</url>
+    <content type="text"><![CDATA[题目luogu3069 思路一道被恶意评分的题目（最多只有绿啊，怎么就蓝了？）。这题用离散化，尺取法。枚举r就好了。为什么？？先看看这题。再回来看本题，有没有什么想法？在一个区间中，一共有&lt;=k+1种数，是不是就可以保证这些数都可以删除，只留下一种数字。那我们是不是只要枚举每一个位置，找到符合的区间，就可以记录（更新）答案了呢？（如果我说不清楚请谅解，可以看代码理解） 代码123456789101112131415161718192021222324252627#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e5+7;int n,a[maxn],k,b[maxn],c[maxn];//a,b数组用于离散化,c数组表示当前这种颜色有几个int main()&#123; scanf("%d%d",&amp;n,&amp;k); for(int i=1;i&lt;=n;i++) scanf("%d",a+i),b[i]=a[i]; sort(b+1,b+1+n); int len=unique(b+1,b+1+n)-b-1; for(int i=1;i&lt;=n;i++) a[i]=lower_bound(b+1,b+1+len,a[i])-b; //前面为离散化，复杂度为o(nlogn) int l=1,r=0,now=0,ans=0; //l,r不解释,now为当前区间有几种颜色 while(r&lt;=n)&#123; r++;//等同于for(int r=1;r&lt;=n;r++) if(!c[a[r]])now++; c[a[r]]++;//当前的颜色没有出现过，now++。 while(l&lt;=n&amp;&amp;now&gt;k+1)&#123;//直到找到符合的区间 c[a[l]]--; if(!c[a[l]])now--; l++;//l不用回到之前，为什么呢？ //因为尺取法是在有单调性的前提才用的。 //什么单调性呢？自己想去 &#125; ans=max(ans,c[a[r]]);//记录/更新答案 &#125; printf("%d\n",ans); return 0;&#125; 就这样，又水了一题，谢谢！！]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>尺取法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[连续子段的差异]]></title>
+    <url>%2F2019%2F02%2F22%2F%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%AE%B5%E7%9A%84%E5%B7%AE%E5%BC%82%2F</url>
+    <content type="text"><![CDATA[题目给出一个长度为n的数列，求有几个区间满足：区间内最大值-最小值&lt;=k。（1&lt;=n&lt;=5e4,0&lt;=k&lt;=1e9,0&lt;=a[i]&lt;=1e9） 思路用两个单调队列，一个记录区间最大值，一个记录区间最小值。若一个区间满足条件，那它的子区间也满足条件。两个指针l,r表示当前枚举的可行区间。枚举r，再不断调整l，使这个区间可行，此时答案加上r-l+1。为什么加上r-l+1就不会少也不会重复呢？因为此时区间[l,r],[l+1,r]…[r,r]都是可行的，并不与之前重复。（代码中的l有点不一样，所以不是加r-l+1，而是加r-l） 代码1234567891011121314151617181920212223242526272829#include&lt;bits/stdc++.h&gt;using namespace std;#define getchar() ((p1==p2?p1=bf,p2=bf+fread(bf,1,1&lt;&lt;21,stdin),p1:p1)==p2?EOF:*p1++)#define rgt registerchar bf[1 &lt;&lt; 21], *p1, *p2;template&lt;typename T&gt;inline T read( rgt T &amp;x )&#123; x = 0; rgt char aa=getchar(); while(aa&lt;'0'||aa&gt;'9') aa=getchar(); while(aa&gt;='0'&amp;&amp;aa&lt;='9') x=(x&lt;&lt;3)+(x&lt;&lt;1)+aa-'0',aa=getchar();&#125; //以上快读为机房大佬给我加的const int maxn=5e4+7;int n,k,a[maxn],ans;deque&lt;int&gt;q1,q2;int main()&#123; read(n),read(k); for(rgt int i=1;i&lt;=n;i++) read(a[i]); int l=0; for(rgt int r=1;r&lt;=n;r++)&#123; while(q1.size()&amp;&amp;a[r]&gt;=a[q1.back()]) q1.pop_back();//维护最大值 while(q2.size()&amp;&amp;a[r]&lt;=a[q2.back()]) q2.pop_back();//维护最小值 q1.push_back(r),q2.push_back(r);//压入当前的位置 while(a[q1.front()]-a[q2.front()]&gt;k)//调整l，使区间可行。 if(q1.front()&lt;q2.front()) l=q1.front(),q1.pop_front(); else l=q2.front(),q2.pop_front();//选下标靠前的那个 ans+=r-l;//记录答案 &#125; printf("%d\n",ans); return 0;&#125; 结束，又水了一题（哈哈），谢谢！！]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>单调队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[质量检测]]></title>
+    <url>%2F2019%2F02%2F22%2F%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%2F</url>
+    <content type="text"><![CDATA[题目点这里 思路看完题目之后发现这不就是一道单调队列求区间最小值吗？这还不简单吗？单调队列又短又快，不选它那选谁？ 代码12345678910111213141516#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e6+7;int n,m,a[maxn];deque&lt;int&gt;que;int main()&#123; scanf("%d%d",&amp;n,&amp;m); for(int i=1;i&lt;=n;i++) scanf("%d",a+i); for(int i=1;i&lt;=n;i++)&#123; while(que.size()&amp;&amp;a[i]&lt;=a[que.back()]) que.pop_back();//去尾 while(que.size()&amp;&amp;i-que.front()&gt;=m) que.pop_front();//去头 que.push_back(i);//加入当前的位置 if(i&gt;=m) printf("%d\n",a[que.front()]);//输出 &#125;//四步结束... return 0;&#125; 结束了，谢谢观看！！]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>单调队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2019-01-27模拟赛]]></title>
+    <url>%2F2019%2F01%2F28%2F2019-01-27%E6%A8%A1%E6%8B%9F%E8%B5%9B%2F</url>
+    <content type="text"><![CDATA[考后总结深深地明白了自己的弱小…（这是自己的总结，就不放题了） 正文T1一道DP题…这里是连续子串，但我写成了不连续子序列……转移方程式： 12if(a[i]==b[j]) f[i][j][k]=f[i-1][j-1][k]+1;else f[i][j][k]=f[i][j][k-1]+1; 就是这样…… 12345678910111213141516171819202122232425#include&lt;bits/stdc++.h&gt;using namespace std;int n,k,f[303][303][303];char a[333],b[333];int main()&#123; scanf("%d%d",&amp;n,&amp;k); scanf("%s%s",a+1,b+1); if(k&gt;=n)&#123;//这个特判不要也行 printf("%d\n",n); return 0; &#125; for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=n;j++) if(a[i]==b[j]) for(int l=0;l&lt;=k;l++) f[i][j][l]=f[i-1][j-1][l]+1; else for(int l=1;l&lt;=k;l++) f[i][j][l]=f[i-1][j-1][l-1]+1;//转移 int maxx=0; for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=n;j++) for(int l=0;l&lt;=k;l++) maxx=max(maxx,f[i][j][l]);//找答案 printf("%d\n",maxx); return 0;&#125; T2这题是可以用暴力骗出40到70不等。但是正解也是很简单的。用bitset就可以将70分的暴力改为满分。单然，还要一点数学知识：乘法原理。还有一点就是会有三元环，要对答案适当的减去三元环中的重复解和不可能的解。 12345678910111213141516171819202122232425#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1555;int n,d[maxn]; char aa;bitset&lt;maxn&gt;b[maxn],bb;//c++STL中的bitsetlong long ans;int main()&#123; scanf("%d",&amp;n); for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=n;j++)&#123; aa=getchar(); while(aa!='0'&amp;&amp;aa!='1') aa=getchar(); b[i][j]=aa-'0'; if(b[i][j]) d[i]++; &#125; for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=n;j++) if(i!=j&amp;&amp;b[i][j])&#123; ans+=(d[i]-1)*(d[j]-1); bb=b[i]&amp;b[j];//记录重复部分 ans-=bb.count();//bb.count():查询在这个bitset二进制中有多少个1 &#125; printf("%lld\n",ans); return 0;&#125; T3这题可以说是难度大，但有40分可以很简单的拿到（40分就可以了？？ 这题要对图拆点，因为只有0或1的遍，所以用BFS加DFS解决这题！！ 正解： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=2e6+10;int tot,n,m,h0[maxn],h1[maxn],cnt,dis[maxn];struct node&#123; int nxt,to;&#125;edge[maxn];queue&lt;int&gt;que;void add0(int x,int y)&#123; edge[++cnt]=(node)&#123;h0[x],y&#125;; h0[x]=cnt;&#125;void add1(int x,int y)&#123; edge[++cnt]=(node)&#123;h1[x],y&#125;; h1[x]=cnt;&#125;void dfs(int x,int val)&#123; if(dis[x]!=-1) return; dis[x]=val,que.push(x); for(int i=h0[x];i;i=edge[i].nxt) dfs(edge[i].to,val); if(x&gt;tot) return; for(int i=0;i&lt;20;i++) if(x&amp;(1&lt;&lt;i)) dfs(x^(1&lt;&lt;i),val);&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); tot=1&lt;&lt;20; int x,y; for(int i=1;i&lt;=n;i++)&#123; scanf("%d",&amp;x); add1(tot+i,x); add0(x,tot+i); &#125; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d",&amp;x,&amp;y); add1(tot+x,tot+y); &#125; memset(dis,-1,sizeof(dis)); dfs(tot+1,0); while(que.size())&#123; int d=que.front();que.pop(); for(int i=h1[d];i;i=edge[i].nxt) dfs(edge[i].to,dis[d]+1); &#125; for(int i=1;i&lt;=n;i++) printf("%d\n",dis[tot+i]); return 0;&#125; (之后补充…)]]></content>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[月下“毛景树”]]></title>
+    <url>%2F2019%2F01%2F26%2F%E6%9C%88%E4%B8%8B%E2%80%9C%E6%AF%9B%E6%99%AF%E6%A0%91%E2%80%9D%2F</url>
+    <content type="text"><![CDATA[题目click it!!更好or更差的体验 思路看完题目之后，很明显这是一道树剖题。为什么这么说呢？ 他会改变树上两点的路径上的边权。 他要查询树上两点的路径上的最大边。 他要改变某条边的边权 从这几点来看就是说我们要在树上做区间操作！！！ 这里有好多难点： 边权是很难使用的，不如将其改为点权 如何用树剖出的几条链组成的序列来进行各种操作 这里我们用线段树来进行区间操作，将边权改为“这条边的一个端点到另一个端点的所花费的值”（两个端点为父子节点的关系），这样就可以将边权化为点权。 比如：$u \to v$这条边的值为3，我们可以将它变为p[v]=3;(意思是v到u这条边的边权为3)。 代码假设树剖之后我们用in[x]表示x这个点的dfs序，id[x]表示x这个编号对应的点（本人英语不好，数组名瞎取的） 之后我就直接给出线段树的操作代码:(别说你连线段树都不懂就来学树剖) 建树1234567891011void build(int c,int l,int r)&#123; lazy[c]=-1;//当然要懒标记啊，这是初始化 if(l==r)&#123; t[c]=a[l]; return; &#125; int mid=(l+r)&gt;&gt;1; build(c&lt;&lt;1,l,mid); build(c&lt;&lt;1|1,mid+1,r); t[c]=max(t[c&lt;&lt;1],t[c&lt;&lt;1|1]);//看上去是不是好简单啊，我就不说了&#125; 下放懒标记(注意：这里本人用了两个懒标记，一个是覆盖（lazy），一个是加（add）) 12345678910111213void spread(int c)&#123; int ls=c&lt;&lt;1,rs=c&lt;&lt;1|1;//ls是左儿子，rs是右儿子 if(lazy[c]&gt;=0)&#123;//如果有覆盖标记（覆盖优先） add[ls]=add[rs]=0;//之前的add就为0了，被覆盖了 t[ls]=t[rs]=lazy[ls]=lazy[rs]=lazy[c];//下放lazy，并修改子区间的值 lazy[c]=-1;//清除标记 &#125; if(add[c])&#123;//这太熟悉了，不说了 add[ls]+=add[c],add[rs]+=add[c]; t[ls]+=add[c],t[rs]+=add[c]; add[c]=0; &#125;&#125; 区间加操作1234567891011void change1(int c,int l,int r,int x,int y,int k)&#123; if(x&lt;=l&amp;&amp;r&lt;=y)&#123; add[c]+=k; t[c]+=k; return; &#125; spread(c); int mid=(l+r)&gt;&gt;1; if(mid&gt;=x) change1(c&lt;&lt;1,l,mid,x,y,k); if(mid&lt;y) change1(c&lt;&lt;1|1,mid+1,r,x,y,k); t[c]=max(t[c&lt;&lt;1],t[c&lt;&lt;1|1]);&#125;//简单易懂，线段树基本操作 区间覆盖123456789101112void change2(int c,int l,int r,int x,int y,int k)&#123; if(x&lt;=l&amp;&amp;r&lt;=y)&#123; t[c]=lazy[c]=k; add[c]=0; return; &#125; spread(c); int mid=(l+r)&gt;&gt;1; if(mid&gt;=x) change2(c&lt;&lt;1,l,mid,x,y,k); if(mid&lt;y) change2(c&lt;&lt;1|1,mid+1,r,x,y,k); t[c]=max(t[c&lt;&lt;1],t[c&lt;&lt;1|1]);&#125;//不说了... 区间查询最值12345678int query(int c,int l,int r,int x,int y)&#123; if(x&lt;=l&amp;&amp;r&lt;=y) return t[c]; spread(c); int mid=(l+r)&gt;&gt;1,maxx=0; if(mid&gt;=x) maxx=query(c&lt;&lt;1,l,mid,x,y); if(mid&lt;y) maxx=max(maxx,query(c&lt;&lt;1|1,mid+1,r,x,y)); return maxx;&#125; 树上查询（这是在树上查询，树剖的大作用就是这个，会详解） 123456789101112131415161718int ask(int x,int y)&#123; int maxx=0; while(top[x]!=top[y])&#123;//两个点当前不在一条重链上时，一条一条的跳到同一重链为止 if(dep[top[x]]&lt;dep[top[y]]) swap(x,y);//深度深的先往上跳（有一点LCA的意思） maxx=max(maxx,query(1,1,n,in[top[x]],in[x]));//这里要将x所在这条链上的值都查询好 //再将它与最终答案进行对比，记录答案 //为什么用线段树是放入的是in[top[x]]和in[x]呢？请大家想一想 //其实就是之前我们用树剖将树化为了一条序列（dfs序），序列中的in[top[x]]到in[x]就是树 //中的top[x]到x. x=fa[top[x]];//这一条链已经操作完了，就跳到上一层链上 &#125; if(dep[x]&gt;dep[y]) swap(x,y);//最后在同一条链时将x变为深度较深的点 //如果大家不懂，自己可以模拟一下dfs序中的x，y点的编号 maxx=max(maxx,query(1,1,n,in[x]+1,in[y]));//为什么in[x]要加1呢？ // 因为我们是边权化点权，最后一点是我们找到的父节点，但我们一直操作的是子节点 //若不懂，请大家模拟理解一下（模拟大法好啊！！！） return maxx;&#125; 还有两个树上修改大家结合上面的修改看看吧（这不是我偷懒！！） 123456789101112131415161718void DO1(int x,int y,int k)&#123;//树上加边权 while(top[x]!=top[y])&#123; if(dep[top[x]]&lt;dep[top[y]]) swap(x,y); change1(1,1,n,in[top[x]],in[x],k); x=fa[top[x]]; &#125; if(dep[x]&gt;dep[y]) swap(x,y); change1(1,1,n,in[x]+1,in[y],k);&#125;void DO2(int x,int y,int k)&#123;//树上覆盖边权 while(top[x]!=top[y])&#123; if(dep[top[x]]&lt;dep[top[y]]) swap(x,y); change2(1,1,n,in[top[x]],in[x],k); x=fa[top[x]]; &#125; if(dep[x]&gt;dep[y]) swap(x,y); change2(1,1,n,in[x]+1,in[y],k);&#125; 就是以上的几种操作，是不是好简单呢！！ 当然，为什么我没写树剖要的那两个DFS呢，因为之前有写过了 这是链接 谢谢大家的阅读！！！！！！！！！！！！！！！！！！！！！ 下面给出完整代码： 完整代码（码风就不要在意了） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e5+10;int n,a[maxn],root,head[maxn],cnt,p[maxn];int dep[maxn],fa[maxn],siz[maxn],son[maxn];int top[maxn],tot,in[maxn];int t[maxn&lt;&lt;2],add[maxn&lt;&lt;2],lazy[maxn&lt;&lt;2];struct node&#123; int nxt,to,w;&#125;edge[maxn&lt;&lt;2];void add_edge(int x,int y,int z)&#123; edge[++cnt]=(node)&#123;head[x],y,z&#125;; head[x]=cnt;&#125;void dfs1(int x,int ffa)&#123; fa[x]=ffa,siz[x]=1; for(int i=head[x];i;i=edge[i].nxt)&#123; int y=edge[i].to; if(y!=ffa)&#123; dep[y]=dep[x]+1; p[y]=edge[i].w; dfs1(y,x); siz[x]+=siz[y]; if(siz[y]&gt;siz[son[x]]) son[x]=y; &#125; &#125;&#125;void dfs2(int x,int tp)&#123; top[x]=tp,in[x]=++tot,a[tot]=p[x]; if(son[x]!=0) dfs2(son[x],tp); for(int i=head[x];i;i=edge[i].nxt)&#123; int y=edge[i].to; if(y!=fa[x]&amp;&amp;y!=son[x]) dfs2(y,y); &#125;&#125;void build(int c,int l,int r)&#123; lazy[c]=-1; if(l==r)&#123; t[c]=a[l]; return; &#125; int mid=(l+r)&gt;&gt;1; build(c&lt;&lt;1,l,mid); build(c&lt;&lt;1|1,mid+1,r); t[c]=max(t[c&lt;&lt;1],t[c&lt;&lt;1|1]);&#125;void spread(int c)&#123; int ls=c&lt;&lt;1,rs=c&lt;&lt;1|1; if(lazy[c]&gt;=0)&#123; add[ls]=add[rs]=0; t[ls]=t[rs]=lazy[ls]=lazy[rs]=lazy[c]; lazy[c]=-1; &#125; if(add[c])&#123; add[ls]+=add[c],add[rs]+=add[c]; t[ls]+=add[c],t[rs]+=add[c]; add[c]=0; &#125;&#125;void change1(int c,int l,int r,int x,int y,int k)&#123; if(x&lt;=l&amp;&amp;r&lt;=y)&#123; add[c]+=k; t[c]+=k; return; &#125; spread(c); int mid=(l+r)&gt;&gt;1; if(mid&gt;=x) change1(c&lt;&lt;1,l,mid,x,y,k); if(mid&lt;y) change1(c&lt;&lt;1|1,mid+1,r,x,y,k); t[c]=max(t[c&lt;&lt;1],t[c&lt;&lt;1|1]);&#125;void change2(int c,int l,int r,int x,int y,int k)&#123; if(x&lt;=l&amp;&amp;r&lt;=y)&#123; t[c]=lazy[c]=k; add[c]=0; return; &#125; spread(c); int mid=(l+r)&gt;&gt;1; if(mid&gt;=x) change2(c&lt;&lt;1,l,mid,x,y,k); if(mid&lt;y) change2(c&lt;&lt;1|1,mid+1,r,x,y,k); t[c]=max(t[c&lt;&lt;1],t[c&lt;&lt;1|1]);&#125;int query(int c,int l,int r,int x,int y)&#123; if(x&lt;=l&amp;&amp;r&lt;=y) return t[c]; spread(c); int mid=(l+r)&gt;&gt;1,maxx=0; if(mid&gt;=x) maxx=query(c&lt;&lt;1,l,mid,x,y); if(mid&lt;y) maxx=max(maxx,query(c&lt;&lt;1|1,mid+1,r,x,y)); return maxx;&#125;int ask(int x,int y)&#123; int maxx=0; while(top[x]!=top[y])&#123; if(dep[top[x]]&lt;dep[top[y]]) swap(x,y); maxx=max(maxx,query(1,1,n,in[top[x]],in[x])); x=fa[top[x]]; &#125; if(dep[x]&gt;dep[y]) swap(x,y); maxx=max(maxx,query(1,1,n,in[x]+1,in[y])); return maxx;&#125;void DO1(int x,int y,int k)&#123; while(top[x]!=top[y])&#123; if(dep[top[x]]&lt;dep[top[y]]) swap(x,y); change1(1,1,n,in[top[x]],in[x],k); x=fa[top[x]]; &#125; if(dep[x]&gt;dep[y]) swap(x,y); change1(1,1,n,in[x]+1,in[y],k);&#125;void DO2(int x,int y,int k)&#123; while(top[x]!=top[y])&#123; if(dep[top[x]]&lt;dep[top[y]]) swap(x,y); change2(1,1,n,in[top[x]],in[x],k); x=fa[top[x]]; &#125; if(dep[x]&gt;dep[y]) swap(x,y); change2(1,1,n,in[x]+1,in[y],k);&#125;int main()&#123; scanf("%d",&amp;n); int x,y,z; for(int i=1;i&lt;n;i++)&#123; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); add_edge(x,y,z),add_edge(y,x,z); &#125; dep[1]=1; dfs1(1,0); dfs2(1,1); build(1,1,n); string s; while(1)&#123; cin&gt;&gt;s; if(s=="Stop") break; if(s=="Max")&#123; scanf("%d%d",&amp;x,&amp;y); printf("%d\n",ask(x,y)); &#125; if(s=="Add")&#123; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); DO1(x,y,z); &#125; if(s=="Change")&#123; scanf("%d%d",&amp;x,&amp;z); if(dep[edge[x*2-1].to]&lt;dep[edge[x*2].to]) x=edge[x*2].to; else x=edge[x*2-1].to; change2(1,1,n,in[x],in[x],z); &#125; if(s=="Cover")&#123; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); DO2(x,y,z); &#125; &#125; return 0;&#125; 小结这一题不难，就是一道树剖模板。]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>树链剖分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[树链剖分初识]]></title>
+    <url>%2F2019%2F01%2F24%2F%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%88%9D%E8%AF%86%2F</url>
+    <content type="text"><![CDATA[前言简单说两句其实这个还真的不是太难理解，本蒟蒻就来简单说说这个算法。 正文大概作用就是将一个树形转化为线形，可以使用线段树、树状数组等各种数据结构加以维护。 基本概念 重结点：子树结点数目最多的结点 轻节点：父亲节点中除了重结点以外的结点 重边：父亲结点和重结点连成的边 轻边：父亲节点和轻节点连成的边 重链：由多条重边连接而成的路径 轻链：由多条轻边连接而成的路径 性质 如果(u, v)是一条轻边，那么size(v) &lt;(=) size(u)/2 从根结点到任意结点的路所经过的轻重链的个数必定都小与O(logn) 代码(个人码风有点不好，请见谅)需要两次DFS 第一次DFS1234567891011121314151617181920int fa[maxn],son[maxn],siz[maxn],dep[maxn];//fa[u]表示u的父节点,son[u]表示u的重儿子节点。//siz[u]表示以u为根的子树的大小,dep[u]表示u在树中的深度。//注意，一般博主习惯将根节点的深度初始为1void dfs1(int u,int father)&#123; fa[u]=father,siz[x]=1;//记录u的父节点，siz[u]初始化 for(int i=head[x];i;i=edge[i].nxt)&#123; //这里博主用的是前向星存边 int v=edge[i].to;//u的子节点 if(v!=father)&#123; dep[v]=dep[u]+1;//更新子节点的深度 dfs1(v,u);//向下搜索 //回溯时更新siz[u],和son[u] siz[u]+=siz[v];//这步就不说了 if(siz[v]&gt;siz[son[u]]) son[u]=v; //这里是更新重儿子节点,如果当前子节点v的子树size比当前保存 //的son[u]的子树size还小的话就更新(初始时son[u]为0,size也为0) &#125; &#125;&#125; 第二次DFS这是树剖的关键，也是树形转线形的重要部分(如果讲的不好请见谅)这一步是将整个树分成若干条重链。每个节点标记一个dfs序，将树上的点变成一个序列中的编号，同样记录下这个编号对应的节点，我们还需要记录每一条重链的开端节点（具体为什么可以看看我那例题的文章）。为什么这样，由于蒟蒻也讲不太清楚，所以就偷懒不说了，望见谅。(就这样水了过来) 给出代码： 12345678910111213141516int top[maxn],in[maxn],id[maxn],tot;//个人码风奇丑无比，请不要在意数组名 //top[u]表示u所在点重链 的开始节点//in[u]表示这一个节点的dfs序,就是编号 //id[u]表示u这一个编号对应的树的节点void dfs2(int u,int tp)&#123; //tp表示当前重链的开始节点 top[u]=tp,in[u]=++tot,id[tot]=u; //记录一下当前节点的top if(son[u]) dfs2(son[u],tp);//如果有重节点,就继续当前重链 for(int i=head[u];i;i=edge[i].nxt)&#123; int v=edge[i].to; if(v!=fa[x]&amp;&amp;v!=son[x]) dfs2(v,v); //如果这点是轻点，以它自己为重链开始点，开始一条重链 &#125;&#125; 结束了。。。(还有一些奇奇怪怪的复杂度证明等等请大家baidu才不说我不会呢！) 例题下面如果还记得的话会更新一点例题： 月下“毛景树”待更新······]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>树链剖分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[远处的牧场Distant Pastures]]></title>
+    <url>%2F2019%2F01%2F24%2F%E8%BF%9C%E5%A4%84%E7%9A%84%E7%89%A7%E5%9C%BADistant-Pastures%2F</url>
+    <content type="text"><![CDATA[好多天没写题解了。 题目自己看看吧点这里 思路不要看它是字符串，其实很水。看完题目了之后先是想到了最短路找最大的一条路径。突然想起了BFS与最短路之间不可描述的关系，最后蒟蒻打了一个又像SPFA又像BFS的东西。但在写代码时也是要注意好一些小细节！ 注意好起点不一定是（1,1）点，还可能是其他点，脑中蹦出来TLE的感觉，看了一眼范围才注意到不必担心。那就开始了打代码的快乐时光。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243#include&lt;bits/stdc++.h&gt;//万能头文件using namespace std;struct node&#123; int x,y;&#125;;//存当前的坐标int n,a,b;long long dis[101][101],ans;char s[101][101]; int mv[4][2]=&#123;&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,-1&#125;,&#123;0,1&#125;&#125;;//扩展节点四个方向bool mapp[101][101];//标记是否在队列之中void BFS(int sx,int sy)&#123; queue&lt;node&gt;que; memset(dis,0x7f7f7f7f,sizeof(dis)); memset(mapp,0,sizeof(mapp));//注意初始化 mapp[sx][sy]=1; que.push((node)&#123;sx,sy&#125;); dis[sx][sy]=0; while(que.size())&#123;//开始了我们的最短路之旅 node d=que.front(); que.pop(); mapp[d.x][d.y]=0;//取出队首 for(int i=0;i&lt;4;i++)&#123;//扩展节点 int tx=mv[i][0]+d.x; int ty=mv[i][1]+d.y; if(tx&gt;0&amp;&amp;tx&lt;=n&amp;&amp;ty&gt;0&amp;&amp;ty&lt;=n)&#123;//是否符合地图范围 int t; if(s[tx][ty]==s[d.x][d.y]) t=a; else t=b;//看当前与扩展点是否相同 if(dis[tx][ty]&gt;dis[d.x][d.y]+t)&#123;//松弛操作 dis[tx][ty]=dis[d.x][d.y]+t; if(mapp[tx][ty]==0) mapp[tx][ty]=1,que.push((node)&#123;tx,ty&#125;); &#125;//不在队列之中要放入队列 &#125; &#125; &#125; for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=n;j++) ans=max(ans,dis[i][j]);//在整个地图中找最大的最短路&#125;int main()&#123; cin&gt;&gt;n&gt;&gt;a&gt;&gt;b; for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=n;j++) cin&gt;&gt;s[i][j];//输入 for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=n;j++) BFS(i,j);//不断枚举开始点 cout&lt;&lt;ans&lt;&lt;endl;//输出 return 0;&#125; 最后说几句，看到这种题不必担心，不会就暴力点，总是会有分的。但之后有想法来改进那是一定要来尝试一下。 蒟蒻表示又水了一天，开心。]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[小猫爬山]]></title>
+    <url>%2F2019%2F01%2F24%2F%E5%B0%8F%E7%8C%AB%E7%88%AC%E5%B1%B1%2F</url>
+    <content type="text"><![CDATA[还记得一次教练将它的名字改了拿来比赛 题目Freda和rainbow只好花钱让它们坐索道下山。索道上的缆车最大承重量为W，而N只小猫的重量分别是C1、C2……CN。当然，每辆缆车上的小猫的重量之和不能超过W。每租用一辆缆车，Freda和rainbow就要付1美元，所以他们想知道，最少需要付多少美元才能把这N只小猫都运送下山？输入格式：第一行包含两个用空格隔开的整数，N和W。接下来N行每行一个整数，其中第i+1行的整数表示第i只小猫的重量Ci。 输出格式：输出一个整数，最少需要多少美元，也就是最少需要多少辆缆车。 思路这题肯定是深搜啊，不要想了，大胆去写吧！ 等等好像有点不对！我闻到了TLE的味道，不如我们将它加点小小的（砍树）剪枝技巧吧。 优化搜索顺序：将小猫由重到轻排序，先重的小猫坐上缆车。 最优性剪枝：如果当前搜索到的结果比我之前找到的答案还大的话就直接return，不需要再搜索下去了。 加了这两个剪枝后，TLE就不会出现在你的眼前了。 代码1234567891011121314151617181920212223242526#include&lt;bits/stdc++.h&gt;using namespace std;int n,w,a[51],ans,x[51];bool cmp( int x,int y)&#123; return x&gt;y; &#125;//压行了解一下void dfs(int now,int cnt)&#123;//搜索正文//两个参数，一个是now，第几只小猫；一个是cnt，用了几辆缆车。 if(cnt&gt;ans) return;//最优性剪枝 if(now&gt;n)&#123;//此时所有小猫都已安排好了 ans=cnt;return;//更新答案并返回，不能再搜下去了 &#125; for(int i=1;i&lt;=cnt;i++) if(x[i]+a[now]&lt;=w)&#123;//如果之前的缆车还可以将这只可怜的小猫装下的话 x[i]+=a[now]; dfs(now+1,cnt); x[i]-=a[now];//记录并接着搜索，不要忘记回溯 &#125; x[cnt+1]=a[now]; dfs(now+1,cnt+1); x[cnt+1]=0;//VIP享受，单猫再来一缆车&#125;int main()&#123; cin&gt;&gt;n&gt;&gt;w;//输入 ans=n;//最坏时一只猫一缆车 for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i]; sort(a+1,a+1+n,cmp);//由大到小排序，快排方便又轻松，再也不用担心TLE了 dfs(1,0); cout&lt;&lt;ans&lt;&lt;endl;//简单输出 return 0;&#125; 这题不难，但我想知道为什么我之前由小到大排，从后往前搜时TLE了，求各位路过大佬教一下。 88~~~ Thanks for your coming. （小秘密）]]></content>
+      <categories>
+        <category>搜索</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>搜索</tag>
+        <tag>剪枝</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dominos]]></title>
+    <url>%2F2019%2F01%2F24%2FDominos%2F</url>
+    <content type="text"><![CDATA[题目这是题目 题意给出多组数据，每组数据有一个n和m，表示点数和边数。之后m行，有两个数x和y，表示有一条从x到y的边（有环）求至少要从多少点出发，可以遍历全图 思路这题就是用Tarjan缩点，使图变为一个DAG，再找入度为0的点有几个就可以了。 如果不会Tarjan就别看了，还有注意是多组数据，要初始化。 这题就是这样，希望不要出现恶意评分！！！ 代码话不多说，给出代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=200001;struct node&#123; int next,to;&#125;edge[maxn];//前向星建边int n,m,dfn[maxn],tot,low[maxn],co[maxn],coc,cnt,in[maxn],head[maxn];stack&lt;int&gt;sta;//这也可以手打，不过我懒void Tarjan(int x)&#123; dfn[x]=low[x]=++tot;sta.push(x); for(int i=head[x];i;i=edge[i].next)&#123; int y=edge[i].to; if(!dfn[y]) Tarjan(y),low[x]=min(low[x],low[y]); else if(!co[y]) low[x]=min(low[x],dfn[y]);//注意这里是dfn[y],不是low[y]!! &#125; if(dfn[x]==low[x])&#123; co[x]=++coc;//找到一个环了，给点染色 while(sta.top()!=x)//同一个环的点染色 co[sta.top()]=coc,sta.pop(); sta.pop();//不要忘记这个，我经常错 &#125;&#125;int main()&#123; int tt; scanf("%d",&amp;tt); while(tt--)&#123; cnt=0,coc=0,tot=0;//一大堆初始化 memset(in,0,sizeof(in));//一大堆初始化 memset(head,0,sizeof(head));//一大堆初始化 memset(dfn,0,sizeof(dfn));//一大堆初始化 memset(low,0,sizeof(low));//一大堆初始化 memset(co,0,sizeof(co));//一大堆初始化 scanf("%d%d",&amp;n,&amp;m); int x,y; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d",&amp;x,&amp;y); edge[++cnt]=(node)&#123;head[x],y&#125;; head[x]=cnt;//建边 &#125; for(int i=1;i&lt;=n;i++) if(!dfn[i]) Tarjan(i);//进行Tarjan缩点 int ans=0; for(int i=1;i&lt;=n;i++) for(int j=head[i];j;j=edge[j].next) if(co[i]!=co[edge[j].to]) in[co[edge[j].to]]++; //如果两个点不是同一种颜色，就说明它们不在同一环中，改变入度 for(int i=1;i&lt;=coc;i++) if(!in[i]) ans++;//这里是从coc个缩点中找入度为0的点 printf("%d\n",ans); &#125; return 0;&#125; 希望能过，再%一下Venus大佬。 谢谢观看。]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
+      <tags>
+        <tag>Tarjan</tag>
+        <tag>题解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MKTHNUM - K-th Number]]></title>
+    <url>%2F2019%2F01%2F24%2FMKTHNUM-K-th-Number%2F</url>
+    <content type="text"><![CDATA[题目点这儿 思路主席树大家一定都有所了解吧，这一题就是主席树的模板啊！！静态区间第K小，不就说明了这题可以用主席树吗？主席树中动态开点就不多说了吧还有就是没看这n个数的范围这么大吗？一定要用离散化 算法想必大家都会一点点主席树吧，那蒟蒻我就不再多说了，实在不行可以看看上面大佬的题解，或是找几篇博客看看，还可以找几个视频看看。 代码不必多说了吧，代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;const int maxn=500001;struct node&#123; int l,r,sum;&#125;T[maxn*20];//这是保存树的结构体struct zz&#123; int x,id;&#125;a[maxn];//离散化时要用int n,m,b[maxn],cnt,root[maxn];bool cmp(zz a,zz b)&#123;return a.x&lt;b.x;&#125;void update(int x,int &amp;rt,int l,int r)&#123;//建树//注意，这里的rt，也就是这棵树的根是会变的 T[++cnt]=T[rt]; rt=cnt; T[rt].sum++;//先与上一个树一样，有改变的地方再新建点 if(l==r) return; int mid=(l+r)&gt;&gt;1;//这里就和线段树的操作一样 if(x&lt;=mid) update(x,T[rt].l,l,mid); else update(x,T[rt].r,mid+1,r);&#125;int ask(int rt1,int rt2,int x,int l,int r)&#123;//查询 int d=T[T[rt2].l].sum-T[T[rt1].l].sum; //前缀和思想，也可以拆开来一颗树一棵树的写，这里我是将它放一起做了 if(l==r) return l; int mid=(l+r)&gt;&gt;1; if(x&lt;=d) return ask(T[rt1].l,T[rt2].l,x,l,mid); //如果这区间左半边的数的数量比x大，那第x小的数一定在左半边。 else return ask(T[rt1].r,T[rt2].r,x-d,mid+1,r); //不然就在右半边找第x-d大的数&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); for(int i=1;i&lt;=n;i++)&#123; scanf("%d",&amp;a[i].x); a[i].id=i; &#125; sort(a+1,a+n+1,cmp);//先排序一遍，从小到大 for(int i=1;i&lt;=n;i++) b[a[i].id]=i;//离散化关键点 for(int i=1;i&lt;=n;i++)&#123; root[i]=root[i-1]; update(b[i],root[i],1,n); &#125;//建树 int x,y,z; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); printf("%d\n",a[ask(root[x-1],root[y],z,1,n)].x);//找区间x到y之间第K小的数 //转化成前缀和，主席树基本操作 &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>主席树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ことりのおやつ（小鸟的点心）]]></title>
+    <url>%2F2019%2F01%2F24%2F%E3%81%93%E3%81%A8%E3%82%8A%E3%81%AE%E3%81%8A%E3%82%84%E3%81%A4%EF%BC%88%E5%B0%8F%E9%B8%9F%E7%9A%84%E7%82%B9%E5%BF%83%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[题目点这里 思路看完了题，这不就是最短路吗？ 怀着对SPFA的热爱之心去码了一遍，一遍AC！！！（这竟然没卡SPFA） 这里就是在松弛之后，向队列加点时加一点判断，看看此时这点的雪是否太厚而被困住，如果不会就加入队列，否则不加。 代码话不多说，代码：1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=500001;int n,m,s,t,g,q,h[maxn],l[maxn],cnt,head[maxn],dis[maxn];bool vis[maxn];struct node&#123; int nxt,to,w;&#125;edge[maxn&lt;&lt;2];void add(int x,int y,int w)&#123; edge[++cnt]=(node)&#123;head[x],y,w&#125;; head[x]=cnt;&#125;void SPFA()&#123; memset(dis,63,sizeof(dis));//离出发点一开始都设为一个很大的数 dis[s]=0; vis[s]=1;//SPFA基本操作 queue&lt;int&gt;que; que.push(s); while(que.size())&#123; int d=que.front();que.pop();vis[d]=0;//别忘了标记去掉 for(int i=head[d];i;i=edge[i].nxt)&#123; int y=edge[i].to; if(dis[y]&gt;dis[d]+edge[i].w)&#123;//松弛操作 dis[y]=dis[d]+edge[i].w; if(!vis[y]&amp;&amp;l[y]&gt;=h[y]+dis[y]*q) que.push(y),vis[y]=1; //就是在这里加判断，从出发开始到这里的这段时间中下的雪加上原来的雪是否大于限制 &#125; &#125; &#125;&#125;int main()&#123; scanf("%d%d%d%d%d%d",&amp;n,&amp;m,&amp;s,&amp;t,&amp;g,&amp;q); for(int i=1;i&lt;=n;i++) scanf("%d%d",&amp;h[i],&amp;l[i]); int x,y,z; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); add(x,y,z),add(y,x,z);//注意这里是双向边 &#125; SPFA(); if(dis[t]&lt;=g) cout&lt;&lt;dis[t]&lt;&lt;endl;//如题意，输出 else cout&lt;&lt;"wtnap wa kotori no oyatsu desu!"&lt;&lt;endl; return 0;&#125; 这题就是这样，谢谢浏览。]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[SCOI2005]栅栏]]></title>
+    <url>%2F2019%2F01%2F23%2FSCOI2005-%E6%A0%85%E6%A0%8F%2F</url>
+    <content type="text"><![CDATA[题目点这里 思路看完题目之后就有着一种打爆搜的冲动，当然是我们喜欢的DFS啦。m&lt;=50为什么不打DFS呢？ 注意题目中要的答案并不是直接爆搜就可以快速的找到。我们还需要加一些“特技”！没错，就是二分答案！！！ 再用爆搜判断这个答案是否可以要（就是二分中的check）。 当然还要剪枝，不然TLE会让你十分难受。 下面说一下这题要用到的剪枝方法： 将提供的木材和需要的木材排序 记录浪费的长度，先前我们已经排好序了，二分时答案就应该是可行的mid，它的意思就是满足前mid块小的需要木板。有一种理想情况是最浪费的一种。比这种情况还浪费的直接剪枝！ ……(还有好的剪枝方法，但蒟蒻直说到这里，如果还会TLE，请大家在想想，排完序后可能还可以做一些事情 我也不知道，别找我 ) 哦，还有等效的剪枝，大家看看代码领悟一下。 还有一些我没说的细节，比如为什么b数组要从大到小开始搜索？ last是干什么的？最浪费的理想情况是什么？ 希望大家可以想一想。 代码下面给出代码：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;bits/stdc++.h&gt;using namespace std;int ans,n,m,a[2000],b[2000],tot,sum[2000],mid,w;int read()&#123;//快读不解释 int X=0;bool w=0; char ch=0; while(!isdigit(ch)) &#123;w|=ch=='-';ch=getchar();&#125; while(isdigit(ch)) X=(X&lt;&lt;3)+(X&lt;&lt;1)+(ch^48),ch=getchar(); return w?-X:X;&#125;bool dfs(int h,int last)&#123; bool ff=false; if(tot-w&lt;sum[mid]) return 0;//剪枝2 if(h==0) return 1; //如果尝试的木板都成功解决，就返回true for(int i=last;i&lt;=m;i++) if(a[i]-b[h]&gt;=0)&#123;//如果可以要，那就试试 a[i]-=b[h]; if(a[i]&lt;b[1]) w+=a[i];//记录浪费的值 if(b[h]==b[h-1]) ff=dfs(h-1,i); else ff=dfs(h-1,1); if(a[i]&lt;b[1]) w-=a[i];//作为DFS，回溯是要的 a[i]+=b[h]; if(ff==true) return 1;//如果之后的尝试中返回可行，那就返回true &#125; return 0;//如果尝试的一切都未能成功，只好返回false&#125;int main()&#123; n=read();//输入不解释 for(int i=1;i&lt;=n;i++) a[i]=read(),tot+=a[i];//tot指的是提供的木板总长，用于剪枝。 m=read(); for(int i=1;i&lt;=m;i++) b[i]=read(); sort(a+1,a+n+1); sort(b+1,b+m+1);//排序使DFS时可以更方便的剪枝 for(int i=1;i&lt;=m;i++) sum[i]=sum[i-1]+b[i];//这是需要的木板长度的前缀和，用于剪枝。 while(sum[m]&gt;tot)m--; int l=0,r=m;//二分，当答案为m时是最理想情况，故r=m。 while(l&lt;=r)&#123; w=0,mid=l+r&gt;&gt;1; if(dfs(mid,1)==1)//DFS判断是否可行 ans=mid,l=mid+1;//可行的话保存答案并且l变大尝试更大 else r=mid-1;//r变小尝试更小的是否可行 &#125; cout&lt;&lt;ans&lt;&lt;endl;//输出不解释 return 0;&#125; 蒟蒻的小小分析到这里结束了，谢谢观看！]]></content>
+      <categories>
+        <category>搜索</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+</search>
