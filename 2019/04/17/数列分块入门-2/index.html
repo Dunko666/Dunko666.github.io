@@ -98,25 +98,25 @@
 
 
 
-  <meta name="description" content="好多天没写题解了。 题目自己看看吧点这里">
-<meta name="keywords" content="题解,最短路">
+  <meta name="description" content="题目题目">
+<meta name="keywords" content="题解,分块">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远处的牧场Distant Pastures">
-<meta property="og:url" content="https://Dunko666.github.io/2019/01/24/远处的牧场Distant-Pastures/index.html">
+<meta property="og:title" content="数列分块入门 2">
+<meta property="og:url" content="https://Dunko666.github.io/2019/04/17/数列分块入门-2/index.html">
 <meta property="og:site_name" content="Dunko_ydk">
-<meta property="og:description" content="好多天没写题解了。 题目自己看看吧点这里">
+<meta property="og:description" content="题目题目">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-24T11:50:56.000Z">
+<meta property="og:updated_time" content="2019-04-17T13:23:19.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="远处的牧场Distant Pastures">
-<meta name="twitter:description" content="好多天没写题解了。 题目自己看看吧点这里">
+<meta name="twitter:title" content="数列分块入门 2">
+<meta name="twitter:description" content="题目题目">
 
 
 
 
 
 
-  <link rel="canonical" href="https://Dunko666.github.io/2019/01/24/远处的牧场Distant-Pastures/">
+  <link rel="canonical" href="https://Dunko666.github.io/2019/04/17/数列分块入门-2/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>远处的牧场Distant Pastures | Dunko_ydk</title>
+  <title>数列分块入门 2 | Dunko_ydk</title>
   
 
 
@@ -371,7 +371,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://Dunko666.github.io/2019/01/24/远处的牧场Distant-Pastures/">
+    <link itemprop="mainEntityOfPage" href="https://Dunko666.github.io/2019/04/17/数列分块入门-2/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ydk">
@@ -388,7 +388,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">远处的牧场Distant Pastures
+          <h1 class="post-title" itemprop="name headline">数列分块入门 2
 
               
             
@@ -414,7 +414,7 @@
                 
               
 
-              <time title="创建时间：2019-01-24 17:26:26 / 修改时间：19:50:56" itemprop="dateCreated datePublished" datetime="2019-01-24T17:26:26+08:00">2019-01-24</time>
+              <time title="创建时间：2019-04-17 21:17:31 / 修改时间：21:23:19" itemprop="dateCreated datePublished" datetime="2019-04-17T21:17:31+08:00">2019-04-17</time>
             
 
             
@@ -436,7 +436,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/图论/" itemprop="url" rel="index"><span itemprop="name">图论</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据结构/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a></span>
 
                 
                 
@@ -455,8 +455,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/01/24/远处的牧场Distant-Pastures/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/24/远处的牧场Distant-Pastures/" itemprop="commentCount"></span>
+                <a href="/2019/04/17/数列分块入门-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/17/数列分块入门-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -464,7 +464,7 @@
 
           
           
-            <span id="/2019/01/24/远处的牧场Distant-Pastures/" class="leancloud_visitors" data-flag-title="远处的牧场Distant Pastures">
+            <span id="/2019/04/17/数列分块入门-2/" class="leancloud_visitors" data-flag-title="数列分块入门 2">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -495,13 +495,16 @@
       
 
       
-        <p>好多天没写题解了。</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><strong>题目</strong></h2><p>自己看看吧<a href="https://www.luogu.org/problemnew/show/P3057" target="_blank" rel="noopener">点这里</a><br><a id="more"></a></p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><strong>思路</strong></h2><p>不要看它是字符串，其实很水。看完题目了之后先是想到了最短路找最大的一条路径。<br>突然想起了BFS与最短路之间不可描述的关系，最后蒟蒻打了一个又像SPFA又像BFS的东西。但在写代码时也是要注意好一些小细节！</p>
-<p>注意好起点不一定是（1,1）点，还可能是其他点，脑中蹦出来TLE的感觉，看了一眼范围才注意到不必担心。那就开始了打代码的快乐时光。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;//万能头文件</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">&#125;;<span class="comment">//存当前的坐标</span></span><br><span class="line"><span class="keyword">int</span> n,a,b;<span class="keyword">long</span> <span class="keyword">long</span> dis[<span class="number">101</span>][<span class="number">101</span>],ans;</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">101</span>][<span class="number">101</span>]; <span class="keyword">int</span> mv[<span class="number">4</span>][<span class="number">2</span>]=&#123;&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>&#125;&#125;;<span class="comment">//扩展节点四个方向</span></span><br><span class="line"><span class="keyword">bool</span> mapp[<span class="number">101</span>][<span class="number">101</span>];<span class="comment">//标记是否在队列之中</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> sx,<span class="keyword">int</span> sy)</span></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;node&gt;que; <span class="built_in">memset</span>(dis,<span class="number">0x7f7f7f7f</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">    <span class="built_in">memset</span>(mapp,<span class="number">0</span>,<span class="keyword">sizeof</span>(mapp));<span class="comment">//注意初始化</span></span><br><span class="line">    mapp[sx][sy]=<span class="number">1</span>; que.push((node)&#123;sx,sy&#125;); dis[sx][sy]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(que.size())&#123;<span class="comment">//开始了我们的最短路之旅</span></span><br><span class="line">        node d=que.front(); que.pop(); mapp[d.x][d.y]=<span class="number">0</span>;<span class="comment">//取出队首</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;<span class="comment">//扩展节点</span></span><br><span class="line">            <span class="keyword">int</span> tx=mv[i][<span class="number">0</span>]+d.x;</span><br><span class="line">            <span class="keyword">int</span> ty=mv[i][<span class="number">1</span>]+d.y;</span><br><span class="line">            <span class="keyword">if</span>(tx&gt;<span class="number">0</span>&amp;&amp;tx&lt;=n&amp;&amp;ty&gt;<span class="number">0</span>&amp;&amp;ty&lt;=n)&#123;<span class="comment">//是否符合地图范围</span></span><br><span class="line">                <span class="keyword">int</span> t;</span><br><span class="line">                <span class="keyword">if</span>(s[tx][ty]==s[d.x][d.y]) t=a;</span><br><span class="line">                <span class="keyword">else</span> t=b;<span class="comment">//看当前与扩展点是否相同</span></span><br><span class="line">                <span class="keyword">if</span>(dis[tx][ty]&gt;dis[d.x][d.y]+t)&#123;<span class="comment">//松弛操作</span></span><br><span class="line">                    dis[tx][ty]=dis[d.x][d.y]+t;</span><br><span class="line">                    <span class="keyword">if</span>(mapp[tx][ty]==<span class="number">0</span>) mapp[tx][ty]=<span class="number">1</span>,que.push((node)&#123;tx,ty&#125;);</span><br><span class="line">                &#125;<span class="comment">//不在队列之中要放入队列</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">    ans=max(ans,dis[i][j]);<span class="comment">//在整个地图中找最大的最短路</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;s[i][j];<span class="comment">//输入</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">    BFS(i,j);<span class="comment">//不断枚举开始点</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//输出</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最后说几句，看到这种题不必担心，不会就暴力点，总是会有分的。但之后有想法来改进那是一定要来尝试一下。</p>
-<p>蒟蒻表示又水了一天，开心。</p>
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><a href="https://loj.ac/problem/6278" target="_blank" rel="noopener">题目</a><br><a id="more"></a></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题用分块。</p>
+<p>要求区间内小于$c * c$的数的个数，区间加减。</p>
+<p>看到n的范围都不超过50000，可以直接将每个块都快速排序，查询时用二分就好了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1e5</span>+<span class="number">7</span>,maxm=<span class="number">500</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,num,a[maxn],b[maxn],l[maxm],r[maxm],pos[maxn],add[maxm];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">()</span></span>&#123;</span><br><span class="line">	num=n/m;<span class="keyword">if</span>(n%m) num++;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=num;i++)</span><br><span class="line">	l[i]=(i<span class="number">-1</span>)*m+<span class="number">1</span>,r[i]=i*m; r[num]=n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=num;i++) sort(b+l[i],b+r[i]+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> L,<span class="keyword">int</span> R,<span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p=pos[L],q=pos[R];</span><br><span class="line">	<span class="keyword">if</span>(p==q) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=L;i&lt;=R;i++) a[i]+=K;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=l[p];i&lt;=r[p];i++) b[i]=a[i];</span><br><span class="line">		sort(b+l[p],b+r[p]+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=L;i&lt;=r[p];i++) a[i]+=K;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=l[p];i&lt;=r[p];i++) b[i]=a[i];</span><br><span class="line">		sort(b+l[p],b+r[p]+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=p+<span class="number">1</span>;i&lt;=q<span class="number">-1</span>;i++) add[i]+=K;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=l[q];i&lt;=R;i++) a[i]+=K;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=l[q];i&lt;=r[q];i++) b[i]=a[i];</span><br><span class="line">		sort(b+l[q],b+r[q]+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> L,<span class="keyword">int</span> R,<span class="keyword">int</span> C)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>,p=pos[L],q=pos[R],k;</span><br><span class="line">	<span class="keyword">if</span>(p==q)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=L;i&lt;=R;i++)</span><br><span class="line">		<span class="keyword">if</span>(a[i]+add[p]&lt;C) ans++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=L;i&lt;=r[p];i++)</span><br><span class="line">			<span class="keyword">if</span>(a[i]+add[p]&lt;C) ans++;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=l[q];i&lt;=R;i++)</span><br><span class="line">			<span class="keyword">if</span>(a[i]+add[q]&lt;C) ans++;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=p+<span class="number">1</span>;i&lt;=q<span class="number">-1</span>;i++)&#123;</span><br><span class="line">			k=lower_bound(b+l[i],b+r[i]+<span class="number">1</span>,C-add[i])-b;</span><br><span class="line">			ans+=k-l[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x,y,z,t;</span><br><span class="line"><span class="comment">//	freopen("a1.in","r",stdin);</span></span><br><span class="line"><span class="comment">//	freopen("1.out","w",stdout);</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);m=<span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]),b[i]=a[i],pos[i]=(i<span class="number">-1</span>)/m+<span class="number">1</span>;</span><br><span class="line">	build();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>,&amp;t,&amp;x,&amp;y,&amp;z);</span><br><span class="line">		<span class="keyword">if</span>(t) <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ask(x,y,z*z));</span><br><span class="line">		<span class="keyword">else</span> change(x,y,z);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>分块系列第2题我就不会了，真菜。</p>
+<p>好吧，这题暴力的没边（<del>可是蒟蒻还是不会</del>）</p>
+<p>就真的是怎么暴力怎么来，分块还加个快排。</p>
+<p>注意点就是要分清a[]与b[]。</p>
+<p>结束，撒花！</p>
 
       
     </div>
@@ -527,7 +530,7 @@
           
             <a href="/tags/题解/" rel="tag"># 题解</a>
           
-            <a href="/tags/最短路/" rel="tag"># 最短路</a>
+            <a href="/tags/分块/" rel="tag"># 分块</a>
           
         </div>
       
@@ -540,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/24/小猫爬山/" rel="next" title="小猫爬山">
-                <i class="fa fa-chevron-left"></i> 小猫爬山
+              <a href="/2019/03/24/左偏堆学习/" rel="next" title="左偏堆学习">
+                <i class="fa fa-chevron-left"></i> 左偏堆学习
               </a>
             
           </div>
@@ -549,10 +552,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/24/树链剖分初识/" rel="prev" title="树链剖分初识">
-                树链剖分初识 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -725,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

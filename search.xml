@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[数列分块入门 2]]></title>
+    <url>%2F2019%2F04%2F17%2F%E6%95%B0%E5%88%97%E5%88%86%E5%9D%97%E5%85%A5%E9%97%A8-2%2F</url>
+    <content type="text"><![CDATA[题目题目 思路此题用分块。 要求区间内小于$c * c$的数的个数，区间加减。 看到n的范围都不超过50000，可以直接将每个块都快速排序，查询时用二分就好了。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#include&lt;bits/stdc++.h&gt;#define int long longusing namespace std;const int maxn=1e5+7,maxm=500;int n,m,num,a[maxn],b[maxn],l[maxm],r[maxm],pos[maxn],add[maxm];void build()&#123; num=n/m;if(n%m) num++; for(int i=1;i&lt;=num;i++) l[i]=(i-1)*m+1,r[i]=i*m; r[num]=n; for(int i=1;i&lt;=num;i++) sort(b+l[i],b+r[i]+1);&#125;void change(int L,int R,int K)&#123; int p=pos[L],q=pos[R]; if(p==q) &#123; for(int i=L;i&lt;=R;i++) a[i]+=K; for(int i=l[p];i&lt;=r[p];i++) b[i]=a[i]; sort(b+l[p],b+r[p]+1); &#125; else &#123; for(int i=L;i&lt;=r[p];i++) a[i]+=K; for(int i=l[p];i&lt;=r[p];i++) b[i]=a[i]; sort(b+l[p],b+r[p]+1); for(int i=p+1;i&lt;=q-1;i++) add[i]+=K; for(int i=l[q];i&lt;=R;i++) a[i]+=K; for(int i=l[q];i&lt;=r[q];i++) b[i]=a[i]; sort(b+l[q],b+r[q]+1); &#125;&#125;int ask(int L,int R,int C)&#123; int ans=0,p=pos[L],q=pos[R],k; if(p==q)&#123; for(int i=L;i&lt;=R;i++) if(a[i]+add[p]&lt;C) ans++; &#125; else &#123; for(int i=L;i&lt;=r[p];i++) if(a[i]+add[p]&lt;C) ans++; for(int i=l[q];i&lt;=R;i++) if(a[i]+add[q]&lt;C) ans++; for(int i=p+1;i&lt;=q-1;i++)&#123; k=lower_bound(b+l[i],b+r[i]+1,C-add[i])-b; ans+=k-l[i]; &#125; &#125; return ans;&#125;signed main()&#123; int x,y,z,t;// freopen("a1.in","r",stdin);// freopen("1.out","w",stdout); scanf("%lld",&amp;n);m=sqrt(n); for(int i=1;i&lt;=n;i++) scanf("%lld",&amp;a[i]),b[i]=a[i],pos[i]=(i-1)/m+1; build(); for(int i=1;i&lt;=n;i++)&#123; scanf("%lld%lld%lld%lld",&amp;t,&amp;x,&amp;y,&amp;z); if(t) printf("%lld\n",ask(x,y,z*z)); else change(x,y,z); &#125; return 0;&#125; 总结分块系列第2题我就不会了，真菜。 好吧，这题暴力的没边（可是蒟蒻还是不会） 就真的是怎么暴力怎么来，分块还加个快排。 注意点就是要分清a[]与b[]。 结束，撒花！]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>分块</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[左偏堆学习]]></title>
+    <url>%2F2019%2F03%2F24%2F%E5%B7%A6%E5%81%8F%E5%A0%86%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[简单说两句这其实是一个简单易懂的可合并堆。 正文概念可合并堆：可以合并的堆（字面意思） 左偏树之前有一个“距离”要说：从x这个点出发，到叶子节点所经过的边数 左偏堆：又称左偏树（废话） 它有堆的性质（这个不知道自己百度或看书）。 x的左儿子的“距离”比右儿子大或等于。 简单解答那这左偏堆搞的那么奇怪干什么？ 首先，要想合并两个堆，用暴力的方法一定会超慢，而左偏树就可以将合并做到log2(n)的级别！！ 那它为什么是log2(n)呢？ 简单的说就是利用了它的性质，之后给出详细的合并方法，请自己想这和性质有何关系。 合并操作现在，我们要合并根为x的小堆和根为y的小堆。 merge(x,y)函数是指合并上述两个堆所组成的新堆的根，x经过一系列操作后变为新堆的根。 如果现在有一个堆是空堆，那就直接返回不为空的那个堆。 1if(!x||!y) return x+y; 接下来就要用维护堆的方式来合并了。 如果当前x点的权值大于y点的权值，就交换x和y（如果权值相等，可以按秩合并）,此时x就是新根了。 结束后还要继续合并x的右节点和y。再维护左偏堆的性质。(根的“距离”=右儿子的“距离”+1) 就这样结束了！！！ 合并代码下面给出merge代码： fa[x]:x的父节点。 ls[x],rs[x]:x的左右儿子。 dis[x]:x的“距离”。 123456789int merge(int x,int y)&#123; if(!x||!y) return x+y; if(a[x]&gt;a[y]||(a[x]==a[y]&amp;&amp;x&gt;y)) swap(x,y);//找新根和按秩合并 rs[x]=merge(rs[x],y);//向下合并 if(dis[ls[x]]&lt;dis[rs[x]]) swap(ls[x],rs[x]);//维护性质 fa[ls[x]]=fa[rs[x]]=fa[x]=x; dis[x]=dis[rs[x]]+1;//更新几个重要信息 return x;&#125;//有细心的人看出了fa[]好像没用？现在没用而已，之后肯定有用的！！！ 找根如何找一点所在堆的堆顶（也就是根）？ 用并查集来实现！！！（fa[]有用了吧） 但我有一个问题没搞懂，并查集维护的话要不要路径压缩？？？ 问了好多大佬，有的说可以压，不然复杂度会降低。但又有的说会破坏性质，不能压！！ 经过我的实测，好像真的没问题，那就压吧！！（不然TLE缠绕在你身边） 代码： 1太简单不写了，如果真的不会可以看例题中的。（不是我懒） 删除根节点怎么删除一个堆的根呢? 很简单，先将这个点的权值赋值为-1，再将它的左右儿子合并就好了。 代码：（知道有点看不懂，但有代码了一定可以自己钻研出来的） 12345void pop(int x)&#123; a[x]=-1; fa[ls[x]]=ls[x],fa[rs[x]]=rs[x]; fa[x]=merge(ls[x],rs[x]);&#125; 结束好像就这么几个我会的，如果之后还学到了的话继续更（如果还记得。 完美撒花！！！！！！ 例题之后随机更新： …]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>左偏堆</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[[USACO13JAN]牛的阵容Cow Lineup]]></title>
     <url>%2F2019%2F02%2F22%2FUSACO13JAN-%E7%89%9B%E7%9A%84%E9%98%B5%E5%AE%B9Cow-Lineup%2F</url>
     <content type="text"><![CDATA[题目luogu3069 思路一道被恶意评分的题目（最多只有绿啊，怎么就蓝了？）。这题用离散化，尺取法。枚举r就好了。为什么？？先看看这题。再回来看本题，有没有什么想法？在一个区间中，一共有&lt;=k+1种数，是不是就可以保证这些数都可以删除，只留下一种数字。那我们是不是只要枚举每一个位置，找到符合的区间，就可以记录（更新）答案了呢？（如果我说不清楚请谅解，可以看代码理解） 代码123456789101112131415161718192021222324252627#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e5+7;int n,a[maxn],k,b[maxn],c[maxn];//a,b数组用于离散化,c数组表示当前这种颜色有几个int main()&#123; scanf("%d%d",&amp;n,&amp;k); for(int i=1;i&lt;=n;i++) scanf("%d",a+i),b[i]=a[i]; sort(b+1,b+1+n); int len=unique(b+1,b+1+n)-b-1; for(int i=1;i&lt;=n;i++) a[i]=lower_bound(b+1,b+1+len,a[i])-b; //前面为离散化，复杂度为o(nlogn) int l=1,r=0,now=0,ans=0; //l,r不解释,now为当前区间有几种颜色 while(r&lt;=n)&#123; r++;//等同于for(int r=1;r&lt;=n;r++) if(!c[a[r]])now++; c[a[r]]++;//当前的颜色没有出现过，now++。 while(l&lt;=n&amp;&amp;now&gt;k+1)&#123;//直到找到符合的区间 c[a[l]]--; if(!c[a[l]])now--; l++;//l不用回到之前，为什么呢？ //因为尺取法是在有单调性的前提才用的。 //什么单调性呢？自己想去 &#125; ans=max(ans,c[a[r]]);//记录/更新答案 &#125; printf("%d\n",ans); return 0;&#125; 就这样，又水了一题，谢谢！！]]></content>
@@ -88,21 +112,9 @@
         <category>搜索</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>搜索</tag>
-        <tag>剪枝</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Dominos]]></title>
-    <url>%2F2019%2F01%2F24%2FDominos%2F</url>
-    <content type="text"><![CDATA[题目这是题目 题意给出多组数据，每组数据有一个n和m，表示点数和边数。之后m行，有两个数x和y，表示有一条从x到y的边（有环）求至少要从多少点出发，可以遍历全图 思路这题就是用Tarjan缩点，使图变为一个DAG，再找入度为0的点有几个就可以了。 如果不会Tarjan就别看了，还有注意是多组数据，要初始化。 这题就是这样，希望不要出现恶意评分！！！ 代码话不多说，给出代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=200001;struct node&#123; int next,to;&#125;edge[maxn];//前向星建边int n,m,dfn[maxn],tot,low[maxn],co[maxn],coc,cnt,in[maxn],head[maxn];stack&lt;int&gt;sta;//这也可以手打，不过我懒void Tarjan(int x)&#123; dfn[x]=low[x]=++tot;sta.push(x); for(int i=head[x];i;i=edge[i].next)&#123; int y=edge[i].to; if(!dfn[y]) Tarjan(y),low[x]=min(low[x],low[y]); else if(!co[y]) low[x]=min(low[x],dfn[y]);//注意这里是dfn[y],不是low[y]!! &#125; if(dfn[x]==low[x])&#123; co[x]=++coc;//找到一个环了，给点染色 while(sta.top()!=x)//同一个环的点染色 co[sta.top()]=coc,sta.pop(); sta.pop();//不要忘记这个，我经常错 &#125;&#125;int main()&#123; int tt; scanf("%d",&amp;tt); while(tt--)&#123; cnt=0,coc=0,tot=0;//一大堆初始化 memset(in,0,sizeof(in));//一大堆初始化 memset(head,0,sizeof(head));//一大堆初始化 memset(dfn,0,sizeof(dfn));//一大堆初始化 memset(low,0,sizeof(low));//一大堆初始化 memset(co,0,sizeof(co));//一大堆初始化 scanf("%d%d",&amp;n,&amp;m); int x,y; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d",&amp;x,&amp;y); edge[++cnt]=(node)&#123;head[x],y&#125;; head[x]=cnt;//建边 &#125; for(int i=1;i&lt;=n;i++) if(!dfn[i]) Tarjan(i);//进行Tarjan缩点 int ans=0; for(int i=1;i&lt;=n;i++) for(int j=head[i];j;j=edge[j].next) if(co[i]!=co[edge[j].to]) in[co[edge[j].to]]++; //如果两个点不是同一种颜色，就说明它们不在同一环中，改变入度 for(int i=1;i&lt;=coc;i++) if(!in[i]) ans++;//这里是从coc个缩点中找入度为0的点 printf("%d\n",ans); &#125; return 0;&#125; 希望能过，再%一下Venus大佬。 谢谢观看。]]></content>
-      <categories>
-        <category>图论</category>
-      </categories>
-      <tags>
-        <tag>Tarjan</tag>
         <tag>题解</tag>
+        <tag>剪枝</tag>
       </tags>
   </entry>
   <entry>
@@ -115,6 +127,18 @@
       <tags>
         <tag>题解</tag>
         <tag>主席树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dominos]]></title>
+    <url>%2F2019%2F01%2F24%2FDominos%2F</url>
+    <content type="text"><![CDATA[题目这是题目 题意给出多组数据，每组数据有一个n和m，表示点数和边数。之后m行，有两个数x和y，表示有一条从x到y的边（有环）求至少要从多少点出发，可以遍历全图 思路这题就是用Tarjan缩点，使图变为一个DAG，再找入度为0的点有几个就可以了。 如果不会Tarjan就别看了，还有注意是多组数据，要初始化。 这题就是这样，希望不要出现恶意评分！！！ 代码话不多说，给出代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=200001;struct node&#123; int next,to;&#125;edge[maxn];//前向星建边int n,m,dfn[maxn],tot,low[maxn],co[maxn],coc,cnt,in[maxn],head[maxn];stack&lt;int&gt;sta;//这也可以手打，不过我懒void Tarjan(int x)&#123; dfn[x]=low[x]=++tot;sta.push(x); for(int i=head[x];i;i=edge[i].next)&#123; int y=edge[i].to; if(!dfn[y]) Tarjan(y),low[x]=min(low[x],low[y]); else if(!co[y]) low[x]=min(low[x],dfn[y]);//注意这里是dfn[y],不是low[y]!! &#125; if(dfn[x]==low[x])&#123; co[x]=++coc;//找到一个环了，给点染色 while(sta.top()!=x)//同一个环的点染色 co[sta.top()]=coc,sta.pop(); sta.pop();//不要忘记这个，我经常错 &#125;&#125;int main()&#123; int tt; scanf("%d",&amp;tt); while(tt--)&#123; cnt=0,coc=0,tot=0;//一大堆初始化 memset(in,0,sizeof(in));//一大堆初始化 memset(head,0,sizeof(head));//一大堆初始化 memset(dfn,0,sizeof(dfn));//一大堆初始化 memset(low,0,sizeof(low));//一大堆初始化 memset(co,0,sizeof(co));//一大堆初始化 scanf("%d%d",&amp;n,&amp;m); int x,y; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d",&amp;x,&amp;y); edge[++cnt]=(node)&#123;head[x],y&#125;; head[x]=cnt;//建边 &#125; for(int i=1;i&lt;=n;i++) if(!dfn[i]) Tarjan(i);//进行Tarjan缩点 int ans=0; for(int i=1;i&lt;=n;i++) for(int j=head[i];j;j=edge[j].next) if(co[i]!=co[edge[j].to]) in[co[edge[j].to]]++; //如果两个点不是同一种颜色，就说明它们不在同一环中，改变入度 for(int i=1;i&lt;=coc;i++) if(!in[i]) ans++;//这里是从coc个缩点中找入度为0的点 printf("%d\n",ans); &#125; return 0;&#125; 希望能过，再%一下Venus大佬。 谢谢观看。]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>Tarjan</tag>
       </tags>
   </entry>
   <entry>
@@ -137,8 +161,8 @@
         <category>搜索</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>搜索</tag>
+        <tag>题解</tag>
       </tags>
   </entry>
 </search>
