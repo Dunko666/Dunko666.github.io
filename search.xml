@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[luogu[3566] Bricks]]></title>
+    <url>%2F2019%2F09%2F26%2Fluogu-3566-Bricks%2F</url>
+    <content type="text"><![CDATA[简单说两句多久没写过题解了呢… blog还要边上的h^ovny指点呢。 题目??? 思路简单想到这是一个贪心。 每次取当前数目最多的那个数，将它放在当前位上。 如果有多个数目相同的数，那优先取最后一个数。（很明显，避免重复） 那这就好做了。数目可以用堆来维护。 （结构体还真是个恶心的东西呢。莫名RE…） 无解的情况有好多处理的方法，就不说了。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=2e6+7;inline int read()&#123; int x=0,f=1;char C=getchar(); while(!isdigit(C)) &#123;if(C=='-') f=-1;C=getchar();&#125; while(isdigit(C)) x=(x&lt;&lt;1)+(x&lt;&lt;3)+C-'0',C=getchar(); return x*f;&#125;int ans[maxn],n,S,T,tot,a[maxn],last;struct node&#123; int id,x; bool operator &lt; (const node &amp;t) const &#123; return x&lt;(t.x)||((x==t.x)&amp;&amp;t.id==T); &#125;&#125;A;priority_queue&lt;node&gt;que;int main()&#123;// freopen("1.in","r",stdin);// freopen("1.out","w",stdout); n=read(),last=ans[1]=S=read(),T=read(); for(int i=1;i&lt;=n;i++) tot+=(a[i]=read()); a[S]--,a[T]--; ans[tot]=T; for(int i=1;i&lt;=n;i++) que.push((node)&#123;i,a[i]&#125;); for(int i=2;i&lt;tot;i++)&#123; bool F=0; node u=que.top(); que.pop(); if(u.id==last) F=1,A=u,u=que.top(),que.pop();// printf("%d %d\n",u.id,u.x); if(F)&#123; if(u.id==A.id) &#123;cout&lt;&lt;0;return 0;&#125; else que.push(A); &#125; ans[i]=u.id; u.x--;if(u.x&gt;0) que.push(u); last=u.id; &#125; int F=1; for(int i=2;i&lt;=tot;i++) if(ans[i]==ans[i-1]) F=0; if(F)&#123; printf("%d",ans[1]); for(int i=2;i&lt;=tot;i++) printf(" %d",ans[i]); &#125; else cout&lt;&lt;F; return 0;&#125; 时间一久了，码风都变了呢。 希望能过，再%一下Venus大佬。 谢谢观看。]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>题解</tag>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[数列分块入门 2]]></title>
     <url>%2F2019%2F04%2F17%2F%E6%95%B0%E5%88%97%E5%88%86%E5%9D%97%E5%85%A5%E9%97%A8-2%2F</url>
     <content type="text"><![CDATA[题目题目 思路此题用分块。 要求区间内小于$c * c$的数的个数，区间加减。 看到n的范围都不超过50000，可以直接将每个块都快速排序，查询时用二分就好了。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#include&lt;bits/stdc++.h&gt;#define int long longusing namespace std;const int maxn=1e5+7,maxm=500;int n,m,num,a[maxn],b[maxn],l[maxm],r[maxm],pos[maxn],add[maxm];void build()&#123; num=n/m;if(n%m) num++; for(int i=1;i&lt;=num;i++) l[i]=(i-1)*m+1,r[i]=i*m; r[num]=n; for(int i=1;i&lt;=num;i++) sort(b+l[i],b+r[i]+1);&#125;void change(int L,int R,int K)&#123; int p=pos[L],q=pos[R]; if(p==q) &#123; for(int i=L;i&lt;=R;i++) a[i]+=K; for(int i=l[p];i&lt;=r[p];i++) b[i]=a[i]; sort(b+l[p],b+r[p]+1); &#125; else &#123; for(int i=L;i&lt;=r[p];i++) a[i]+=K; for(int i=l[p];i&lt;=r[p];i++) b[i]=a[i]; sort(b+l[p],b+r[p]+1); for(int i=p+1;i&lt;=q-1;i++) add[i]+=K; for(int i=l[q];i&lt;=R;i++) a[i]+=K; for(int i=l[q];i&lt;=r[q];i++) b[i]=a[i]; sort(b+l[q],b+r[q]+1); &#125;&#125;int ask(int L,int R,int C)&#123; int ans=0,p=pos[L],q=pos[R],k; if(p==q)&#123; for(int i=L;i&lt;=R;i++) if(a[i]+add[p]&lt;C) ans++; &#125; else &#123; for(int i=L;i&lt;=r[p];i++) if(a[i]+add[p]&lt;C) ans++; for(int i=l[q];i&lt;=R;i++) if(a[i]+add[q]&lt;C) ans++; for(int i=p+1;i&lt;=q-1;i++)&#123; k=lower_bound(b+l[i],b+r[i]+1,C-add[i])-b; ans+=k-l[i]; &#125; &#125; return ans;&#125;signed main()&#123; int x,y,z,t;// freopen("a1.in","r",stdin);// freopen("1.out","w",stdout); scanf("%lld",&amp;n);m=sqrt(n); for(int i=1;i&lt;=n;i++) scanf("%lld",&amp;a[i]),b[i]=a[i],pos[i]=(i-1)/m+1; build(); for(int i=1;i&lt;=n;i++)&#123; scanf("%lld%lld%lld%lld",&amp;t,&amp;x,&amp;y,&amp;z); if(t) printf("%lld\n",ask(x,y,z*z)); else change(x,y,z); &#125; return 0;&#125; 总结分块系列第2题我就不会了，真菜。 好吧，这题暴力的没边（可是蒟蒻还是不会） 就真的是怎么暴力怎么来，分块还加个快排。 注意点就是要分清a[]与b[]。 结束，撒花！]]></content>
@@ -112,9 +124,21 @@
         <category>搜索</category>
       </categories>
       <tags>
-        <tag>搜索</tag>
         <tag>题解</tag>
+        <tag>搜索</tag>
         <tag>剪枝</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dominos]]></title>
+    <url>%2F2019%2F01%2F24%2FDominos%2F</url>
+    <content type="text"><![CDATA[题目这是题目 题意给出多组数据，每组数据有一个n和m，表示点数和边数。之后m行，有两个数x和y，表示有一条从x到y的边（有环）求至少要从多少点出发，可以遍历全图 思路这题就是用Tarjan缩点，使图变为一个DAG，再找入度为0的点有几个就可以了。 如果不会Tarjan就别看了，还有注意是多组数据，要初始化。 这题就是这样，希望不要出现恶意评分！！！ 代码话不多说，给出代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=200001;struct node&#123; int next,to;&#125;edge[maxn];//前向星建边int n,m,dfn[maxn],tot,low[maxn],co[maxn],coc,cnt,in[maxn],head[maxn];stack&lt;int&gt;sta;//这也可以手打，不过我懒void Tarjan(int x)&#123; dfn[x]=low[x]=++tot;sta.push(x); for(int i=head[x];i;i=edge[i].next)&#123; int y=edge[i].to; if(!dfn[y]) Tarjan(y),low[x]=min(low[x],low[y]); else if(!co[y]) low[x]=min(low[x],dfn[y]);//注意这里是dfn[y],不是low[y]!! &#125; if(dfn[x]==low[x])&#123; co[x]=++coc;//找到一个环了，给点染色 while(sta.top()!=x)//同一个环的点染色 co[sta.top()]=coc,sta.pop(); sta.pop();//不要忘记这个，我经常错 &#125;&#125;int main()&#123; int tt; scanf("%d",&amp;tt); while(tt--)&#123; cnt=0,coc=0,tot=0;//一大堆初始化 memset(in,0,sizeof(in));//一大堆初始化 memset(head,0,sizeof(head));//一大堆初始化 memset(dfn,0,sizeof(dfn));//一大堆初始化 memset(low,0,sizeof(low));//一大堆初始化 memset(co,0,sizeof(co));//一大堆初始化 scanf("%d%d",&amp;n,&amp;m); int x,y; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d",&amp;x,&amp;y); edge[++cnt]=(node)&#123;head[x],y&#125;; head[x]=cnt;//建边 &#125; for(int i=1;i&lt;=n;i++) if(!dfn[i]) Tarjan(i);//进行Tarjan缩点 int ans=0; for(int i=1;i&lt;=n;i++) for(int j=head[i];j;j=edge[j].next) if(co[i]!=co[edge[j].to]) in[co[edge[j].to]]++; //如果两个点不是同一种颜色，就说明它们不在同一环中，改变入度 for(int i=1;i&lt;=coc;i++) if(!in[i]) ans++;//这里是从coc个缩点中找入度为0的点 printf("%d\n",ans); &#125; return 0;&#125; 希望能过，再%一下Venus大佬。 谢谢观看。]]></content>
+      <categories>
+        <category>图论</category>
+      </categories>
+      <tags>
+        <tag>Tarjan</tag>
+        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -127,18 +151,6 @@
       <tags>
         <tag>题解</tag>
         <tag>主席树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Dominos]]></title>
-    <url>%2F2019%2F01%2F24%2FDominos%2F</url>
-    <content type="text"><![CDATA[题目这是题目 题意给出多组数据，每组数据有一个n和m，表示点数和边数。之后m行，有两个数x和y，表示有一条从x到y的边（有环）求至少要从多少点出发，可以遍历全图 思路这题就是用Tarjan缩点，使图变为一个DAG，再找入度为0的点有几个就可以了。 如果不会Tarjan就别看了，还有注意是多组数据，要初始化。 这题就是这样，希望不要出现恶意评分！！！ 代码话不多说，给出代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=200001;struct node&#123; int next,to;&#125;edge[maxn];//前向星建边int n,m,dfn[maxn],tot,low[maxn],co[maxn],coc,cnt,in[maxn],head[maxn];stack&lt;int&gt;sta;//这也可以手打，不过我懒void Tarjan(int x)&#123; dfn[x]=low[x]=++tot;sta.push(x); for(int i=head[x];i;i=edge[i].next)&#123; int y=edge[i].to; if(!dfn[y]) Tarjan(y),low[x]=min(low[x],low[y]); else if(!co[y]) low[x]=min(low[x],dfn[y]);//注意这里是dfn[y],不是low[y]!! &#125; if(dfn[x]==low[x])&#123; co[x]=++coc;//找到一个环了，给点染色 while(sta.top()!=x)//同一个环的点染色 co[sta.top()]=coc,sta.pop(); sta.pop();//不要忘记这个，我经常错 &#125;&#125;int main()&#123; int tt; scanf("%d",&amp;tt); while(tt--)&#123; cnt=0,coc=0,tot=0;//一大堆初始化 memset(in,0,sizeof(in));//一大堆初始化 memset(head,0,sizeof(head));//一大堆初始化 memset(dfn,0,sizeof(dfn));//一大堆初始化 memset(low,0,sizeof(low));//一大堆初始化 memset(co,0,sizeof(co));//一大堆初始化 scanf("%d%d",&amp;n,&amp;m); int x,y; for(int i=1;i&lt;=m;i++)&#123; scanf("%d%d",&amp;x,&amp;y); edge[++cnt]=(node)&#123;head[x],y&#125;; head[x]=cnt;//建边 &#125; for(int i=1;i&lt;=n;i++) if(!dfn[i]) Tarjan(i);//进行Tarjan缩点 int ans=0; for(int i=1;i&lt;=n;i++) for(int j=head[i];j;j=edge[j].next) if(co[i]!=co[edge[j].to]) in[co[edge[j].to]]++; //如果两个点不是同一种颜色，就说明它们不在同一环中，改变入度 for(int i=1;i&lt;=coc;i++) if(!in[i]) ans++;//这里是从coc个缩点中找入度为0的点 printf("%d\n",ans); &#125; return 0;&#125; 希望能过，再%一下Venus大佬。 谢谢观看。]]></content>
-      <categories>
-        <category>图论</category>
-      </categories>
-      <tags>
-        <tag>题解</tag>
-        <tag>Tarjan</tag>
       </tags>
   </entry>
   <entry>
@@ -161,8 +173,8 @@
         <category>搜索</category>
       </categories>
       <tags>
-        <tag>搜索</tag>
         <tag>题解</tag>
+        <tag>搜索</tag>
       </tags>
   </entry>
 </search>
