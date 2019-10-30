@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[数据备份]]></title>
+    <url>%2F2019%2F10%2F30%2F%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%2F</url>
+    <content type="text"><![CDATA[题目这是题目 思路看书做的这道题。 首先可以想到最优解的配对方案定是选择相邻的两个点配对。（二分图匹配？） 记$i$号点与$i-1$号点的距离为$d[i]$ ，题目就是要求这$n-1$个数中选$k​$个数且选择的数不相邻，所有数总和的最小值。（DP？？） 正解当然就是我们最方便的堆！！！ 先看K=1时：答案就是d数组的最小值。 当K=2时： 设$d_{min}$ 的下标为$x​$ 。 答案就是$d[x]$ + 除去$d[x-1],d[x],d[x+1]$剩下数的最小值， 或$d[x-1]+d[x+1]$。 用书上的证明： 如果$d[x-1]$和$d[x+1]$都没选，那么不选$d[x]$一定不优；如果在$d[x-1]$和$d[x+1]$中选了一个，那把那个换成$d[x]​$一定更优，所以最优解就一定在这两个之中。 以上和堆没有关系啊 可以得到推论：最小值两边的数要么都选要么都不选。 因此我们可以先选最小值$d[x]$,再删除$d[x-1],d[x],d[x+1]$，再插入$d[x-1]+d[x+1]-d[x]$（一个“反悔”操作） 整体上就删去了一个数，问题变为了$n-1$个数中选$k-1$个数的子问题了。 这样一直做$k​$次就好了。 有一个细节就是$d[0]$和$d[n]$要为一个极大值，保证不受两端的影响。 再之后用链表和堆来维护就好了。 代码123456789101112131415161718192021222324252627282930313233343536373839#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=5e5+7;inline int read()&#123; int x=0,f=1;char C=getchar(); while(!isdigit(C)) &#123;if(C=='-') f=-1;C=getchar();&#125; while(isdigit(C)) x=(x&lt;&lt;1)+(x&lt;&lt;3)+C-'0',C=getchar(); return x*f;&#125;int n,k,d[maxn],a[maxn];int L[maxn],R[maxn],ans;bool vis[maxn];priority_queue&lt;pair&lt;int,int&gt; &gt;que;#define mk make_pairinline void Del(int x)&#123; L[x]=L[L[x]],R[x]=R[R[x]], L[R[x]]=x,R[L[x]]=x;&#125;int main()&#123;// freopen("1.in","r",stdin); n=read(),k=read(); for(int i=1;i&lt;=n;i++) d[i]=read(),a[i-1]=d[i]-d[i-1], L[i]=i-1,R[i]=i+1; a[n]=a[0]=1&lt;&lt;28; for(int i=1;i&lt;n;i++) que.push(mk(-a[i],i)); while(k&amp;&amp;que.size())&#123; int u=que.top().second; que.pop(); if(vis[u]) continue; ans+=a[u]; k--; int pre=L[u],nxt=R[u]; vis[pre]=vis[nxt]=1; Del(u); a[u]=a[pre]+a[nxt]-a[u]; que.push(mk(-a[u],u)); &#125; printf("%d",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[飞扬的小鸟]]></title>
+    <url>%2F2019%2F10%2F30%2F%E9%A3%9E%E6%89%AC%E7%9A%84%E5%B0%8F%E9%B8%9F%2F</url>
+    <content type="text"><![CDATA[题目这是题目 思路看完数据范围之后发现，这题部分分还是不错的。（模拟赛想不到正解可以爆搜拿点分） 正解不难想，看得出是一个像背包一样的DP。 状态一维是横坐标，一维是纵坐标。$f[i][j]$ 表示到$(i,j)$ 这位置是最少要用的步数。 转移超简单，不多写了，细节看代码。（可以滚动数组优化一下空间） 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=10007,maxm=1007,inf=1&lt;&lt;28;inline int read()&#123; int x=0,f=1;char C=getchar(); while(!isdigit(C)) &#123;if(C=='-') f=-1;C=getchar();&#125; while(isdigit(C)) x=(x&lt;&lt;1)+(x&lt;&lt;3)+C-'0',C=getchar(); return x*f;&#125;int n,m,k,x[maxn],y[maxn],P[maxn],L[maxn],H[maxn];int f[2][maxm],sum[maxn];int main()&#123; n=read(),m=read(),k=read(); for(int i=1;i&lt;=n;i++) x[i]=read(),y[i]=read(); for(int i=1;i&lt;=n;i++) L[i]=0,H[i]=m+1; for(int i=1;i&lt;=k;i++) P[i]=read(),L[P[i]]=read(),H[P[i]]=read(), sum[P[i]]=1; for(int i=1;i&lt;=n;i++) sum[i]+=sum[i-1]; int now=0,pre=1; for(int i=1;i&lt;=n;i++,now^=1,pre^=1)&#123;// cout&lt;&lt;i&lt;&lt;":----- "&lt;&lt;endl; for(int j=1;j&lt;=m;j++) f[now][j]=inf; for(int j=x[i];j&lt;H[i];j++) if(j-x[i]&gt;=0) f[now][j]=min(f[now][j],min(f[now][j-x[i]],f[pre][j-x[i]])+1); if(H[i]&gt;m) for(int j=m-x[i]+1;j&lt;=m;j++) f[now][m]=min(f[now][m],min(f[now][j],f[pre][j])+1); for(int j=L[i]+1;j&lt;H[i];j++) if(j+y[i]&lt;=m) f[now][j]=min(f[now][j],f[pre][j+y[i]]); bool F=1;// cout&lt;&lt;L[i]&lt;&lt;" "&lt;&lt;H[i]&lt;&lt;" -----"&lt;&lt;endl;// for(int j=1;j&lt;=m;j++) cout&lt;&lt;j&lt;&lt;" "&lt;&lt;f[now][j]&lt;&lt;endl; for(int j=L[i]+1;j&lt;H[i];j++) if(f[now][j]&lt;inf) F=0; if(F) &#123;printf("0\n%d\n",sum[i-1]);return 0;&#125; for(int j=0;j&lt;=L[i];j++) f[now][j]=inf; for(int j=H[i];j&lt;=m;j++) f[now][j]=inf; &#125; int ans=inf; for(int i=L[n]+1;i&lt;H[n];i++) ans=min(ans,f[pre][i]); printf("1\n%d\n",ans); return 0;&#125;/*2 1000 21 10001 10001 10 122 998 1000*/]]></content>
+      <categories>
+        <category>动态规划</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[luogu[3566] Bricks]]></title>
     <url>%2F2019%2F09%2F26%2Fluogu-3566-Bricks%2F</url>
     <content type="text"><![CDATA[简单说两句多久没写过题解了呢… blog还要边上的h^ovny指点呢。 题目??? 思路简单想到这是一个贪心。 每次取当前数目最多的那个数，将它放在当前位上。 如果有多个数目相同的数，那优先取最后一个数。（很明显，避免重复） 那这就好做了。数目可以用堆来维护。 （结构体还真是个恶心的东西呢。莫名RE…） 无解的情况有好多处理的方法，就不说了。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=2e6+7;inline int read()&#123; int x=0,f=1;char C=getchar(); while(!isdigit(C)) &#123;if(C=='-') f=-1;C=getchar();&#125; while(isdigit(C)) x=(x&lt;&lt;1)+(x&lt;&lt;3)+C-'0',C=getchar(); return x*f;&#125;int ans[maxn],n,S,T,tot,a[maxn],last;struct node&#123; int id,x; bool operator &lt; (const node &amp;t) const &#123; return x&lt;(t.x)||((x==t.x)&amp;&amp;t.id==T); &#125;&#125;A;priority_queue&lt;node&gt;que;int main()&#123;// freopen("1.in","r",stdin);// freopen("1.out","w",stdout); n=read(),last=ans[1]=S=read(),T=read(); for(int i=1;i&lt;=n;i++) tot+=(a[i]=read()); a[S]--,a[T]--; ans[tot]=T; for(int i=1;i&lt;=n;i++) que.push((node)&#123;i,a[i]&#125;); for(int i=2;i&lt;tot;i++)&#123; bool F=0; node u=que.top(); que.pop(); if(u.id==last) F=1,A=u,u=que.top(),que.pop();// printf("%d %d\n",u.id,u.x); if(F)&#123; if(u.id==A.id) &#123;cout&lt;&lt;0;return 0;&#125; else que.push(A); &#125; ans[i]=u.id; u.x--;if(u.x&gt;0) que.push(u); last=u.id; &#125; int F=1; for(int i=2;i&lt;=tot;i++) if(ans[i]==ans[i-1]) F=0; if(F)&#123; printf("%d",ans[1]); for(int i=2;i&lt;=tot;i++) printf(" %d",ans[i]); &#125; else cout&lt;&lt;F; return 0;&#125; 时间一久了，码风都变了呢。 希望能过，再%一下Venus大佬。 谢谢观看。]]></content>
@@ -8,7 +30,6 @@
         <category>其他</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>贪心</tag>
       </tags>
   </entry>
@@ -20,7 +41,6 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>分块</tag>
       </tags>
   </entry>
@@ -44,7 +64,6 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>尺取法</tag>
       </tags>
   </entry>
@@ -56,7 +75,6 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>单调队列</tag>
       </tags>
   </entry>
@@ -68,7 +86,6 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>单调队列</tag>
       </tags>
   </entry>
@@ -88,7 +105,6 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -112,7 +128,6 @@
         <category>图论</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>最短路</tag>
       </tags>
   </entry>
@@ -124,7 +139,6 @@
         <category>搜索</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>搜索</tag>
         <tag>剪枝</tag>
       </tags>
@@ -138,7 +152,6 @@
       </categories>
       <tags>
         <tag>Tarjan</tag>
-        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -149,7 +162,6 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>主席树</tag>
       </tags>
   </entry>
@@ -161,7 +173,6 @@
         <category>图论</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>最短路</tag>
       </tags>
   </entry>
@@ -173,7 +184,6 @@
         <category>搜索</category>
       </categories>
       <tags>
-        <tag>题解</tag>
         <tag>搜索</tag>
       </tags>
   </entry>
