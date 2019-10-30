@@ -806,7 +806,7 @@
                 
               
 
-              <time title="创建时间：2019-10-30 15:46:27 / 修改时间：16:20:58" itemprop="dateCreated datePublished" datetime="2019-10-30T15:46:27+08:00">2019-10-30</time>
+              <time title="创建时间：2019-10-30 15:46:27 / 修改时间：16:27:34" itemprop="dateCreated datePublished" datetime="2019-10-30T15:46:27+08:00">2019-10-30</time>
             
 
             
@@ -888,28 +888,16 @@
 
       
         
+          <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><a href="https://www.luogu.org/problem/P3620" target="_blank" rel="noopener">这是题目</a></p>
+          <!--noindex-->
           
-            <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><a href="https://www.luogu.org/problem/P3620" target="_blank" rel="noopener">这是题目</a></p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>看书做的这道题。</p>
-<p>首先可以想到最优解的配对方案定是选择相邻的两个点配对。（二分图匹配？）</p>
-<p>记$i$号点与$i-1$号点的距离为$d[i]$ ，题目就是要求这$n-1$个数中选$k​$个数且选择的数不相邻，所有数总和的最小值。（DP？？）</p>
-<p>正解当然就是我们最方便的<strong>堆</strong>！！！</p>
-<p>先看K=1时：答案就是d数组的最小值。</p>
-<p>当K=2时： 设$d_{min}$ 的下标为$x​$ 。</p>
-<p>答案就是<strong>$d[x]$ + 除去$d[x-1],d[x],d[x+1]$剩下数的最小值</strong>，</p>
-<p>或<strong>$d[x-1]+d[x+1]$</strong>。</p>
-<p>用书上的证明：</p>
-<p><strong>如果$d[x-1]$和$d[x+1]$都没选，那么不选$d[x]$一定不优；如果在$d[x-1]$和$d[x+1]$中选了一个，那把那个换成$d[x]​$一定更优，所以最优解就一定在这两个之中。</strong></p>
-<p><del>以上和堆没有关系啊</del></p>
-<p>可以得到推论：最小值两边的数要么都选要么都不选。</p>
-<p>因此我们可以先选最小值$d[x]$,再删除$d[x-1],d[x],d[x+1]$，再插入$d[x-1]+d[x+1]-d[x]$（一个<strong>“反悔”操作</strong>）</p>
-<p>整体上就删去了一个数，问题变为了$n-1$个数中选$k-1$个数的子问题了。</p>
-<p>这样一直做$k​$次就好了。</p>
-<p><strong>有一个细节</strong>就是$d[0]$和$d[n]$要为一个极大值，保证不受两端的影响。</p>
-<p>再之后用链表和堆来维护就好了。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">5e5</span>+<span class="number">7</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> C=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(C)) &#123;<span class="keyword">if</span>(C==<span class="string">'-'</span>) f=<span class="number">-1</span>;C=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(C)) x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+C-<span class="string">'0'</span>,C=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n,k,d[maxn],a[maxn];</span><br><span class="line"><span class="keyword">int</span> L[maxn],R[maxn],ans;</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line">priority_queue&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt;que;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mk make_pair</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Del</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    L[x]=L[L[x]],R[x]=R[R[x]],</span><br><span class="line">    L[R[x]]=x,R[L[x]]=x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//	freopen("1.in","r",stdin);</span></span><br><span class="line">    n=read(),k=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">      d[i]=read(),a[i<span class="number">-1</span>]=d[i]-d[i<span class="number">-1</span>],</span><br><span class="line">      L[i]=i<span class="number">-1</span>,R[i]=i+<span class="number">1</span>;</span><br><span class="line">    a[n]=a[<span class="number">0</span>]=<span class="number">1</span>&lt;&lt;<span class="number">28</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++) que.push(mk(-a[i],i));</span><br><span class="line">    <span class="keyword">while</span>(k&amp;&amp;que.size())&#123;</span><br><span class="line">        <span class="keyword">int</span> u=que.top().second; que.pop();</span><br><span class="line">        <span class="keyword">if</span>(vis[u]) <span class="keyword">continue</span>;</span><br><span class="line">		ans+=a[u]; k--;</span><br><span class="line">        <span class="keyword">int</span> pre=L[u],nxt=R[u];</span><br><span class="line">        vis[pre]=vis[nxt]=<span class="number">1</span>;</span><br><span class="line">        Del(u);</span><br><span class="line">		a[u]=a[pre]+a[nxt]-a[u];</span><br><span class="line">        que.push(mk(-a[u],u));</span><br><span class="line">        </span><br><span class="line">    &#125; <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/10/30/数据备份/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
